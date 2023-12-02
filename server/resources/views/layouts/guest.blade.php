@@ -44,7 +44,7 @@
         <!-- Sidebar Start -->
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
-                <a href="index.html" class="navbar-brand mx-4 mb-3">
+                <a href="{{route('admin.dashboard')}}" class="navbar-brand mx-4 mb-3">
                     <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Trang admin</h3>
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
@@ -54,7 +54,11 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
-                        <span>Admin</span>
+                        <form method="POST" action="{{ route('logout') }}">
+                                                    @csrf
+                                                    <a href="{{ route('logout') }}"
+                                                        onClick="event.preventDefault(); this.closest('form').submit();">Đăng xuất</a>
+                                                </form>
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
