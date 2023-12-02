@@ -16,7 +16,7 @@
                             <div class="dashboard-menu">
                                 <ul class="nav flex-row" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link" id="orders-tab" href="#"><i
+                                        <a class="nav-link" id="orders-tab" href="{{route('user.orders')}}"><i
                                                 class="fi-rs-shopping-bag mr-10"></i>Đơn hàng</a>
                                     </li>
                                     <li class="nav-item">
@@ -60,7 +60,7 @@
                                         </div>
 
                                         <div class="card-body">
-                                            <form method="post" action="{{route('profile.update')}}">
+                                            <form method="post" action="{{route('user.profile.update')}}">
                                                 @csrf
                                                 @method('put')
                                                 <?php

@@ -1,8 +1,15 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\OrderController;
+use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\HomeComponent;
+use App\Http\Livewire\User\UserPaymentResultComponent;
+use App\Http\Livewire\ShopComponent;
+use App\Http\Livewire\User\UserCheckoutComponent;
+use App\Http\Livewire\User\UserOrdersComponent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\DetailsComponent;
+use App\Http\Controllers\CheckoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +48,27 @@ Route::group(['middleware' => ['userLogin']], function () {
 
     //user
     Route::group(['middleware'=> 'authUser', 'prefix' => 'user'], function () {
-        
+        Route::get('orders', UserOrdersComponent::class)->name('user.orders');
+        Route::post('place-order', [CheckoutController::class, 'payment'])->name('user.payment');
+        Route::get('order-detail/{order_id}', [OrderController::class, 'show'])->name('user.order_detail');
+        Route::post('order-cancel/{order_id}', [OrderController::class, 'cancel'])->name('user.order_cancel');
+        Route::get('checkout', UserCheckoutComponent::class)->name('user.checkout');
+        Route::get('payment-result', UserPaymentResultComponent::class)->name('user.payment_result');
     });
 });
 
+// Guest
 Route::get('/', HomeComponent::class)->name('home.index');
+Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/cart', CartComponent::class)->name('shop.cart');
+Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
+Route::get('/products{category_id}', DetailsComponent::class)->name('product.detailss');
+Route::get('/product-category/{slug}', App\Http\Livewire\CategoryComponent::class)->name('product.category');
+Route::get('/search', App\Http\Livewire\SearchComponent::class)->name('product.search');
+Route::get('/About', App\Http\Livewire\AboutComponent::class)->name('about');
+Route::get('/Blog', App\Http\Livewire\BlogComponent::class)->name('blog');
+Route::get('/wishlist', App\Http\Livewire\WishlistComponent::class)->name('shop.wishlist');
+
+Route::get('/handle-vnpay-return', [CheckoutController::class, 'handleVNPayReturn'])->name('vnpay.return');
 
 require __DIR__.'/auth.php';
