@@ -1,8 +1,10 @@
 /server/node_modules
+/server/public/build
 /server/public/hot
 /server/public/storage
 /server/storage/*.key
 /server/vendor
+/server/public/assets/imgs/products
 .env
 .env.backup
 .phpunit.result.cache
