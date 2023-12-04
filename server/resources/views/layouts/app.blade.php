@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Book Store</title>
+    <title>e-commerce</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -37,6 +37,7 @@
                         @livewire('search')
                         <div class="header-action-right">
                             <div class="header-action-2">
+                                @livewire('wishlist-icon-component')
                                 @livewire('cart-icon-component')
                                 
                                             <div class="search-style-1">
@@ -82,19 +83,60 @@
                                             <li><a class="active" href="/">Trang chủ </a></li>
                                             <li class="position-static"><a href="#">Danh mục <i
                                                         class="fi-rs-angle-down"></i></a>
-                                                
+                                                <ul class="mega-menu">
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Dành cho nam</a>
+                                                        <ul>
+                                                            <li><a href="#">Thời trang nam</a>
+                                                            </li>
+                                                            <li><a href="#">Đồng hồ</a>
+                                                            </li>
+                                                            <li><a href="#">Giày dép nam</a>
+                                                            </li>
+                                                            <li><a href="#">Ba lô & túi ví nam</a>
+                                                            </li>
+                                                            <li><a href="#">Dụng cụ và tiện ích</a>
+                                                            </li>
+
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Dành cho nữ</a>
+                                                        <ul>
+                                                            <li><a href="#">Thời trang nữ</a>
+                                                            </li>
+                                                            </li>
+                                                            <li><a href="#">Mỹ phẩm</a></li>
+                                                            <li><a href="#">Túi ví nữ</a>
+                                                            </li>
+                                                            <li><a href="#">Giày dép nữ</a></li>
+                                                            <li><a href="#">Phụ kiện & trang sức nữ</a></li>
+                                                        </ul>
+                                                    </li>
+                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <a class="menu-title" href="#">Khác</a>
+                                                        <ul>
+                                                            <li><a href="#">Thiết bị điện gia dụng</a></li>
+                                                            <li><a href="#">Thiết bị điện tử</a></li>
+                                                            <li><a href="#">Điện thoại & phụ kiện</a></li>
+                                                        </ul>
+                                                    </li>
+                                                </ul>
                                             </li>
                                             @auth
-                                                <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
+                                                @if(Auth::user()->utype == 'USR')
+                                                 <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
                                                 
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                </ul>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                    </ul>
 
                                                 </li>
+                                                @endif
                                             @endif
 
-                                            <li><a href="#">Mua sắm</a></li>
+                                            <li><a href="{{route('shop')}}">Mua sắm</a></li>
+                                            <li><a href="{{route('about')}}">Về website</a></li>
                                             
                                         </ul>
                                     </nav>
@@ -151,6 +193,7 @@
                     <div class="col-lg-2 col-md-3">
                         <h5 class="widget-title wow fadeIn animated">Thông tin</h5>
                         <ul class="footer-list wow fadeIn animated mb-sm-5 mb-md-0">
+                            <li><a href="{{route('about')}}">Về chúng tôi</a></li>
                             <li><a href="#">Thông tin vận chuyển</a></li>
                             <li><a href="#">Chính sách bảo mật</a></li>
                             <li><a href="#">Các điều khoản</a></li>
@@ -161,10 +204,10 @@
                         <h5 class="widget-title wow fadeIn animated">Tài khoản</h5>
                         <ul class="footer-list wow fadeIn animated">
                             <li><a href="my-account.html">Thông tin tài khoản</a></li>
-                            <li><a href="#">Xem giỏ hàng</a></li>
+                            <li><a href="{{route('shop.cart')}}">Xem giỏ hàng</a></li>
                             <li><a href="#">Xem sản phẩm yêu thích</a></li>
                             <li><a href="#">Theo dõi đơn hàng</a></li>
-                            <li><a href="#">Đơn hàng</a></li>
+                            <li><a href="{{route('user.checkout')}}">Đơn hàng</a></li>
                         </ul>
                     </div>
                     <div class="col-lg-4 mob-center">
@@ -200,7 +243,7 @@
                 </div>
                 <div class="col-lg-6">
                     <p class="text-lg-end text-start font-sm text-muted mb-0">
-                    Thuộc quyền sở hửu &copy; <strong class="text-brand">Bookstorettt</strong> 
+                    Thuộc quyền sở hửu &copy; <strong class="text-brand">TTT</strong> 
                     </p>
                 </div>
             </div>
@@ -232,7 +275,41 @@
     <script src="{{ asset ('assets/js/main.js?v=3.3')}}"></script>
     <script src="{{ asset ('assets/js/shop.js?v=3.3')}}"></script>
     
-          
+  
+  <!-- Messenger Plugin chat Code -->
+        <!-- Messenger Plugin chat Code -->
+            <div id="fb-root"></div>
+
+        <!-- Your Plugin chat code -->
+        <div id="fb-customer-chat" class="fb-customerchat">
+        </div>
+        <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "164229313445795");
+        chatbox.setAttribute("attribution", "biz_inbox");
+        </script>
+
+        <!-- Your SDK code -->
+        <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+            xfbml            : true,
+            version          : 'v18.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        @livewireStyles
+        @stack('scripts')
+     
+        
 </body>
 
 </html>

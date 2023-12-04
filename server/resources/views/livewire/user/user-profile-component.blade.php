@@ -60,7 +60,7 @@
                                         </div>
 
                                         <div class="card-body">
-                                            <form method="post" action="{{route('user.profile.update')}}">
+                                            <form method="post" action="{{route('profile.update')}}">
                                                 @csrf
                                                 @method('put')
                                                 <?php

@@ -10,55 +10,7 @@
 </style>
 @livewireStyles
 <main class="main">
-<section class="banner-2 section-padding pb-0">
-            <div class="container">
-                <div class="banner-img banner-big wow fadeIn animated f-none">
-                    <img src="assets/imgs/banner/banner-4.jpg" alt="">
-                    <div class="banner-text d-md-block d-none">
-                        <h4 class="mb-15 mt-40 text-brand">Tuổi thơ qua những trang sách</h4>
-                        <h1 class="fw-600 mb-20"  style="color: white; ">Tặng sách tôi thấy hoa vàng trên cỏ xanh <br>cho đơn hàng trên 400k</h1>
-                        <a href="{{route('shop')}}" class="btn">Xem thêm <i class="fi-rs-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section class="banners mb-15">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="banner-img wow fadeIn animated">
-                            <img src="assets/imgs/banner/banner-1.jpg" alt="">
-                            <div class="banner-text">
-                                <span >Ưu đãi</span>
-                                <h4 style="color: blue; ">Giảm 20% vào <br>Ngày nhà giáo Việt Nam</h4>
-                                <a href="{{route('shop')}}" class="btn">Mua ngay <i class="fi-rs-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="banner-img wow fadeIn animated">
-                            <img src="assets/imgs/banner/banner-2.jpg" alt="">
-                            <div class="banner-text">
-                                <span >Giảm giá</span>
-                                <h4 style="color: blue; ">Tuyển tập <br>sách tiếng anh</h4>
-                                <a href="{{route('shop')}}" class="btn">Mua ngay <i class="fi-rs-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 d-md-none d-lg-flex">
-                        <div class="banner-img wow fadeIn animated  mb-sm-0">
-                            <img src="assets/imgs/banner/banner-3.jpg" alt="">
-                            <div class="banner-text">
-                                <span style="color:#F">Sách mới về</span>
-                                <h4 style="color: yellow; ">Mua ngay hôm nay để nhận <br>Ưu đãi và giảm giá</h4>
-                                <a href="{{route('shop')}}" class="btn">Mua ngay <i class="fi-rs-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <section class="home-slider position-relative pt-50">
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
                 <div class="single-hero-slider single-animation-wrap">
@@ -138,11 +90,6 @@
                                                 <img class="default-img" style="height: 400px" src="{{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
                                                 <img class="hover-img"  style="height: 400px" src="{{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
                                             </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Nổi bật</span>
@@ -236,7 +183,7 @@
         </section>        
         <section class="section-padding">
             <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20"><span>Mới </span>phát hành</h3>
+                <h3 class="section-title mb-20">Sản phẩm <span> MỚI</span></h3>
                 <div class="carausel-6-columns-cover position-relative">
                     <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
                     <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
