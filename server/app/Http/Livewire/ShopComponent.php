@@ -4,6 +4,8 @@ namespace App\Http\Livewire;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Wish;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Cart;
@@ -21,18 +23,20 @@ class ShopComponent extends Component
         session()->flash('success_message','Item added in Cart');
         return redirect()->route('shop.cart');
     }
-    public function addToWishlist($product_id, $product_name, $product_price){
-        Cart::instance('wishlist')->add($product_id,$product_name,1,$product_price)->associate('\App\Models\Product');
-        $this->emitTo('livewire.wishlist-icon-component','refreshComponent' );
+    public function addToWishlist($product_id, $product_name, $product_price)
+    {
+        if(!Wish::where(['user_id' => Auth::user()->id, 'product_id' => $product_id])->exists()) {
+            Wish::create([
+                'user_id'=> Auth::user()->id,
+                'product_id'=> $product_id,
+            ]);
+        }
     }
 
     public function removeFromWishlist($product_id){
-        foreach(Cart::instance('wishlist')->content() as $witem){
-            if($witem->id == $product_id){
-                Cart::instance('wishlist')->remove($witem->rowId);
-                $this->emitTo('livewire.wishlist-icon-component','refreshComponent' );
-                return;
-            }
+        $wish = Wish::where(['user_id' => Auth::user()->id, 'product_id' => $product_id])->first();
+        if($wish) {
+            $wish->delete();
         }
     }
 

@@ -21,29 +21,20 @@
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row product-grid-4">
-                   
-                            @foreach( Cart::instance('wishlist')->content() as $item )
+                    @if(Auth::user()->wishes->count() > 0)
+                    @foreach(Auth::user()->wishes as $item )
                             <div class="col-lg-3 col-md-4 col-6 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="{{route('product.details',['slug'=>$item->model->slug])}}">
+                                            <a href="{{route('product.details',['slug'=>$item->product->slug])}}">
                                                 <img class="default-img"
-                                                    src="{{ asset('assets/imgs/products/products')}}/{{$item->model->image}}"
-                                                    alt="{{$item->model->name}}">
+                                                    src="{{ asset('assets/imgs/products/products')}}/{{$item->product->image}}"
+                                                    alt="{{$item->product->name}}">
                                                 <img class="hover-img"
-                                                    src="{{ asset('assets/imgs/products/products')}}/{{$item->model->image}}"
-                                                    alt="{{$item->model->name}}">
+                                                    src="{{ asset('assets/imgs/products/products')}}/{{$item->product->image}}"
+                                                    alt="{{$item->product->name}}">
                                             </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn hover-up"
-                                                data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                                <i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up"
-                                                href="wishlist.php"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn hover-up" href="compare.php"><i
-                                                    class="fi-rs-shuffle"></i></a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             <span class="hot">Hot</span>
@@ -54,22 +45,27 @@
                                            
                                         </div>
                                         <h2><a
-                                                href="{{route('product.details',['slug'=>$item->model->slug])}}">{{$item->model->name}}</a>
+                                                href="{{route('product.details',['slug'=>$item->product->slug])}}">{{$item->product->name}}</a>
                                         </h2>
                                        
                                         <div class="product-price">
-                                            <span>{{number_format($item->model->regular_price)}} VND </span>
+                                            <span>{{number_format($item->product->regular_price)}} VND </span>
                                             <!-- <span class="old-price">$245.8</span> -->
                                         </div>
                                         <div class="product-action-1 show">
-                                        <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$item->model->id}})"><i class="fi-rs-heart"></i></a>
-
+                                        <a aria-label="Bỏ yêu thích" class="action-btn hover-up" style="background-color: #07b55b; color: #fff;" href="#" wire:click.prevent="removeFromWishlist({{$item->product->id}})"><i class="fi-rs-heart"></i></a>
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
                             @endforeach
+                    @else
+                        <div class="alert alert-warning" role="alert">
+                            Bạn không có sản phẩm yêu thích!
+                        </div>
+                    @endif
+                            
                 </div>
             </div>
         </section>

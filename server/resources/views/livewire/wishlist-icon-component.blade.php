@@ -1,10 +1,12 @@
 @livewireStyles
+@if(Auth::check())
 <div class="header-action-icon-2">
-    <a href="{{route('shop.wishlist')}}">
+    <a href="{{route('user.wishlist')}}">
         <img class="svgInject" alt="Surfside Media"  src="{{asset('assets/imgs/theme/icons/like.png')}}">
-        @if(Cart::instance('wishlist')->count() > 0)    
-            <span class="pro-count blue">{{Cart::instance('wishlist')->count()}}</span>
+        @if(Auth::user()->wishes && Auth::user()->wishes->count() > 0)    
+            <span class="pro-count blue">{{Auth::user()->wishes->count()}}</span>
         @endif
     </a>
 </div>
+@endif
 @livewireScripts

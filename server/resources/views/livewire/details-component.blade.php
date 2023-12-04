@@ -117,23 +117,18 @@
                                         </div>
                                         <div class="product-extra-link2 mt-15  mb-15">
                                             
-                                            @livewireStyles
-                                            @if($product->quantity > 0)
-                                                <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Thêm vào giỏ hàng</button>
-                                            @else    
-                                                <button type="button" class="button button-add-to-cart " onclick="addToCart('{{$product->name}}')" >Hết Hàng</button>
-                                            @endif
-                                           
-                                                @php 
-                                                    $witems = Cart::instance('wishlist')->content()->pluck('id');
-                                                @endphp
-                                                
-                                                @if($witems->contains($product->id))
-                                                <a aria-label="" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart" ></i></a>
-                                                 @else
-                                                 <a aria-label="" class="action-btn hover-up"   wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart" ></i></a>
+                                                @if($product->quantity > 0)
+                                                    <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Thêm vào giỏ hàng</button>
+                                                @else    
+                                                    <button type="button" class="button button-add-to-cart " onclick="addToCart('{{$product->name}}')" >Hết Hàng</button>
                                                 @endif
-                                                @livewireScripts 
+                                                @if(Auth::check())
+                                                    @if(Auth::user()->wishes && Auth::user()->wishes->pluck('product_id')->contains($product->id))
+                                                        <a aria-label="Bỏ yêu thích" class="action-btn hover-up" style="background-color: #07b55b; color: #fff;" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                                    @else
+                                                        <a aria-label="Yêu thích" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                    @endif
+                                                @endif
                                             </div>
                                            
                                         </div>

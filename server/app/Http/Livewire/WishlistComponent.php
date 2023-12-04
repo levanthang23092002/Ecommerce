@@ -2,18 +2,16 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Wish;
 use Livewire\Component;
-use Cart;
+use Illuminate\Support\Facades\Auth;
 
 class WishlistComponent extends Component
 {
     public function removeFromWishlist($product_id){
-        foreach(Cart::instance('wishlist')->content() as $witem){
-            if($witem->id == $product_id){
-                Cart::instance('wishlist')->remove($witem->rowId);
-                $this->emitTo('livewire.wishlist-icon-component','refreshComponent' );
-                return;
-            }
+        $wish = Wish::where(['user_id' => Auth::user()->id, 'product_id' => $product_id])->first();
+        if($wish) {
+            $wish->delete();
         }
     }
     public function render()

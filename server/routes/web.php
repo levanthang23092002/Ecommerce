@@ -10,6 +10,7 @@ use App\Http\Livewire\User\UserOrdersComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Livewire\WishlistComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,6 +55,7 @@ Route::group(['middleware' => ['userLogin']], function () {
         Route::post('order-cancel/{order_id}', [OrderController::class, 'cancel'])->name('user.order_cancel');
         Route::get('checkout', UserCheckoutComponent::class)->name('user.checkout');
         Route::get('payment-result', UserPaymentResultComponent::class)->name('user.payment_result');
+        Route::get('wishlist', WishlistComponent::class)->name('user.wishlist');
     });
 });
 
@@ -67,7 +69,6 @@ Route::get('/product-category/{slug}', App\Http\Livewire\CategoryComponent::clas
 Route::get('/search', App\Http\Livewire\SearchComponent::class)->name('product.search');
 Route::get('/About', App\Http\Livewire\AboutComponent::class)->name('about');
 Route::get('/Blog', App\Http\Livewire\BlogComponent::class)->name('blog');
-Route::get('/wishlist', App\Http\Livewire\WishlistComponent::class)->name('shop.wishlist');
 
 Route::get('/handle-vnpay-return', [CheckoutController::class, 'handleVNPayReturn'])->name('vnpay.return');
 
