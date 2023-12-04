@@ -10,9 +10,11 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Review; 
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class DetailsComponent extends Component
 {
+    use WithPagination;
     public $slug;
     public $rating;
     public $comment;
@@ -20,11 +22,12 @@ class DetailsComponent extends Component
     public function mount($slug)
     {
         $this->slug = $slug;
+        $this->rating = 5;
     }
 
-    public function store($product_id, $product_name, $product_price)
+    public function store($product_id, $product_name, $product_price, $product_quantity = 1)
     {
-        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('\App\Models\Product');
+        Cart::instance('cart')->add($product_id, $product_name, $product_quantity, $product_price)->associate('\App\Models\Product');
         session()->flash('success_message', 'Đã thêm vào giỏ hàng');
         return redirect()->route('shop.cart');
     }
@@ -52,7 +55,7 @@ class DetailsComponent extends Component
             'rating' => 'required|numeric|min:1|max:5',
             'comment' => 'required',
         ]);
-    
+
         $product = Product::where('slug', $this->slug)->first();
         if (Auth::id() === null) {
             session()->flash('error_message', 'Bạn phải đăng nhập để đánh giá.');
@@ -64,7 +67,12 @@ class DetailsComponent extends Component
         }
 
         if ($this->userHasReviewedProduct($product->id)) {
-            session()->flash('error_message', 'Bạn đã đánh giá rồi.');
+            $review = Review::where('user_id', Auth::user()->id)->where('product_id', $product->id)->first();
+            $review->rating = $this->rating;
+            $review->comment = $this->comment;
+            $review->save();
+            $this->reset(['comment']);
+            session()->flash('success_message', 'Đã cập nhật đánh giá.');
             return;
         }
 
@@ -75,10 +83,9 @@ class DetailsComponent extends Component
             'comment' => $this->comment,
         ]);
     
-        $this->reset(['rating', 'comment']);
-    
-        $this->emit('refreshReviews');
-        return redirect()->route('product.details', ['slug' => $this->slug]);
+        $this->reset(['comment']);
+        session()->flash('success_message', 'Đã gửi đánh giá của bạn.');
+        return;
     }
     
     private function userHasReviewedProduct($productId)
@@ -110,7 +117,7 @@ class DetailsComponent extends Component
             $categories = Category::orderBy('name', 'ASC')->get();
             $publisher = Publisher::where('id', $product->publisher_id)->first();
             $author = Author::where('id', $product->author_id)->first();
-            $reviews = Review::where('product_id', $product->id)->get(); 
+            $reviews = Review::where('product_id', $product->id)->orderBy('updated_at', 'desc')->paginate(5);
 
             return view('livewire.details-component', [
                 'product' => $product,
