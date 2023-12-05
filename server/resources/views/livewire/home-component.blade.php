@@ -117,6 +117,8 @@
                                                 @else
                                                     <a aria-label="Yêu thích" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
                                                 @endif
+                                            @else
+                                                <a aria-label="Yêu thích" class="action-btn hover-up" href="{{route('login')}}"><i class="fi-rs-heart"></i></a>
                                             @endif
                                             <a aria-label="Thêm vào giỏ hàng" class="action-btn hover-up"
                                                 wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i
@@ -197,12 +199,6 @@
                                         <img class="default-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
                                         <img class="hover-img" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
                                     </a>
-                                </div>
-                                <div class="product-action-1">
-                                    <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                        <i class="fi-rs-eye"></i></a>
-                                    <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="wishlist.php" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn small hover-up" href="compare.php" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     <span class="new">New</span>

@@ -8,7 +8,7 @@ use App\Models\Wish;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Cart;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeComponent extends Component
 {
@@ -19,6 +19,12 @@ class HomeComponent extends Component
     public $max_value = 100000000;
 
     public function store($product_id, $product_name, $product_price){
+        foreach (Cart::instance('cart')->content() as $cartItem) {
+            if ($cartItem->id == $product_id) {
+                Cart::instance('cart')->remove($cartItem->rowId);
+                break; 
+            }
+        }
         Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('\App\Models\Product');
         session()->flash('success_message','Item added in Cart');
         return redirect()->route('shop.cart');

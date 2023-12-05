@@ -8,5 +8,11 @@
         @endif
     </a>
 </div>
+@else
+<div class="header-action-icon-2">
+    <a href="{{route('login')}}">
+        <img class="svgInject" alt="Surfside Media"  src="{{asset('assets/imgs/theme/icons/like.png')}}">
+    </a>
+</div>
 @endif
 @livewireScripts

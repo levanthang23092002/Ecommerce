@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class vnpay_payments extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'vnp_Amount',
         'vnp_BankCode',
@@ -20,4 +21,9 @@ class vnpay_payments extends Model
         'vnp_TxnRef',
         'vnp_SecureHash',
     ];
+
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'id', 'vnp_TxnRef');
+    }
 }

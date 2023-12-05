@@ -22,7 +22,7 @@
             <div class="container">
                 <div class="row product-grid-4">
                     @if(Auth::user()->wishes->count() > 0)
-                    @foreach(Auth::user()->wishes as $item )
+                    @foreach($wishes as $item )
                             <div class="col-lg-3 col-md-4 col-6 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap">
@@ -60,6 +60,7 @@
 
                             </div>
                             @endforeach
+                            {{$wishes->links('pagination::bootstrap-4')}}
                     @else
                         <div class="alert alert-warning" role="alert">
                             Bạn không có sản phẩm yêu thích!

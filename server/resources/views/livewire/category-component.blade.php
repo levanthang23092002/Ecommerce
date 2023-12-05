@@ -119,12 +119,16 @@
                                         </div>
                                         <div class="product-action-1 show">
                                             @livewireStyles
-                                            @if($witems->contains($product->id))
-                                                <a aria-label="Remove From Wishlist" class="action-btn hover-up wishlisted" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                            @if(Auth::check())
+                                                @if(Auth::user()->wishes && Auth::user()->wishes->pluck('product_id')->contains($product->id))
+                                                    <a aria-label="Bỏ yêu thích" class="action-btn hover-up" style="background-color: #07b55b; color: #fff;" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Yêu thích" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                @endif
                                             @else
-                                                <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                <a aria-label="Yêu thích" class="action-btn hover-up" href="{{route('login')}}"><i class="fi-rs-heart"></i></a>
                                             @endif
-                                            <a aria-label="Add To Cart" class="action-btn hover-up"
+                                            <a aria-label="Thêm vào giỏ hàng" class="action-btn hover-up"
                                                 wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i
                                                     class="fi-rs-shopping-bag-add"></i></a>
                                             @livewireScripts
