@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>e-commerce</title>
+    <title>Bookstore</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -85,40 +85,41 @@
                                                         class="fi-rs-angle-down"></i></a>
                                                 <ul class="mega-menu">
                                                     <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a class="menu-title" href="#">Dành cho nam</a>
+                                                        <a class="menu-title" href="#">Truyện chữ</a>
                                                         <ul>
-                                                            <li><a href="#">Thời trang nam</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-han-quoc']) }}">Truyện chữ Hàn Quốc</a>
                                                             </li>
-                                                            <li><a href="#">Đồng hồ</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-nhat-ban']) }}">Truyện chữ Nhật Bản</a>
                                                             </li>
-                                                            <li><a href="#">Giày dép nam</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-phuong-tay']) }}">Truyện chữ Phương Tây</a>
                                                             </li>
-                                                            <li><a href="#">Ba lô & túi ví nam</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-viet-nam']) }}">Truyện chữ Việt Nam</a>
                                                             </li>
-                                                            <li><a href="#">Dụng cụ và tiện ích</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-trung-quoc']) }}">Truyện chữ Trung Quốc</a>
                                                             </li>
 
                                                         </ul>
                                                     </li>
                                                     <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a class="menu-title" href="#">Dành cho nữ</a>
+                                                        <a class="menu-title" href="#">Truyện tranh</a>
                                                         <ul>
-                                                            <li><a href="#">Thời trang nữ</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-han-quoc']) }}">Truyện tranh Hàn Quốc</a>
                                                             </li>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-nhat-ban']) }}">Truyện tranh Nhật Bản</a>
                                                             </li>
-                                                            <li><a href="#">Mỹ phẩm</a></li>
-                                                            <li><a href="#">Túi ví nữ</a>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-phuong-tay']) }}">Truyện tranh Phương
+                                                                    Tây</a></li>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-viet-nam']) }}">Truyện tranh Việt Nam</a>
                                                             </li>
-                                                            <li><a href="#">Giày dép nữ</a></li>
-                                                            <li><a href="#">Phụ kiện & trang sức nữ</a></li>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-trung-quoc']) }}">Truyện tranh Trung
+                                                                    Quốc</a></li>
                                                         </ul>
                                                     </li>
                                                     <li class="sub-mega-menu sub-mega-menu-width-22">
                                                         <a class="menu-title" href="#">Khác</a>
                                                         <ul>
-                                                            <li><a href="#">Thiết bị điện gia dụng</a></li>
-                                                            <li><a href="#">Thiết bị điện tử</a></li>
-                                                            <li><a href="#">Điện thoại & phụ kiện</a></li>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'art-book']) }}">Art Book</a></li>
+                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chon-bo']) }}">Truyện chọn bộ</a></li>
                                                         </ul>
                                                     </li>
                                                 </ul>

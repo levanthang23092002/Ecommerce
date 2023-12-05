@@ -33,7 +33,7 @@
                                         <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                         <div class="product-image-slider">
                                             <figure class="border-radius-10 overflow-hidden">
-                                                <img src="{{asset('assets/imgs/products/products')}}/{{$product->image}} " alt="product image" style="width: 100%; object-fit: cover; aspect-ratio: 1/1;">
+                                                <img src="{{asset('assets/imgs/products/products')}}/{{$product->image}} " alt="product image">
                                             </figure>
                                         </div>
                                     </div>
@@ -53,7 +53,8 @@
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
                                                
-                                               <p style="font-size:17px">Thương hiệu: <a href="#" >{{$publisher->name}}</a></p>
+                                               <p style="font-size:17px">Nhà xuất bản: <a href="#" >{{$publisher->name}}</a></p>
+                                               <p style="font-size:17px">Tác giả: <a href="#" >{{$author->name}}</a></p>
                                                @php
                                                     $totalRatings = count($product->reviews);
                                                     $countRatings = [0, 0, 0, 0, 0];
@@ -75,39 +76,17 @@
 
                                                 <p style="font-size:17px">Đánh giá: {{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20"></p>
                                             </div>
-                                            <div>
-
+                                        <div>
                                             </div>
                                         </div>
-                                        
-                                        <div class="attr-detail attr-size mb-20">
-                                            <p class="mr-10">Tùy chọn</p>
-                                            <ul class="list-filter size-filter font-small">
-                                                <li><a href="#">Bản thường</a></li>
-                                                <li class="active"><a href="#">Bản giới hạn</a></li>
-                                            </ul>
+                                        <div class="short-desc mb-30">
+                                            <p class="font-sm">Mô tả: {{$product->description}}</p>
                                         </div>
-                                        <div class="d-flex align-items-center gap-3">
-                                            <div class="mb-20">
-                                                    @if($product->quantity > 0)
-                                                        <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">{{$product->quantity}}</span></p>
-                                                    @else 
-                                                        <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">Hết hàng</span></p>
-                                                    @endif   
-                                            </div>
-
-                                            <div class="detail-qty border radius mb-20">
-                                                <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">1</span>
-                                                <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                            </div>
-                                        </div>
-                                    <div class="clearfix product-price-cover mb-20">
+                                        <div class="clearfix product-price-cover mb-20">
                                             <div class="product-price primary-color float-left">
                                                 <ins><span class="text-brand">{{number_format($product->regular_price)}} VND</span></ins>
-                                                <ins><span class="old-price font-md ml-15">{{number_format($product->sale_price)}}</span></ins>
+                                                <ins><span class="old-price font-md ml-15">{{number_format($product->sale_price)}} VND</span></ins>
                                                 @php
-                                                    
                                                     $percentageOff = (($product->sale_price - $product->regular_price) / $product->sale_price) * 100;
                                                 @endphp
                                                 <span class="discount-percentage" style="font-size:20px">
@@ -115,10 +94,25 @@
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="product-extra-link2 mt-15  mb-15">
-                                            
+
+                                        <div class="detail-extralink">
+                                            <div class="border radius m-auto" style="max-width: 80px;padding: 9px 20px;position: relative;width: 100%;
+    border-radius: 4px;">
+                                                @if($quantity != 1)
+                                                    <a href="#" class="qty-down" style="bottom:0;font-size: 16px;position: absolute;right: 8px;color: #707070;" wire:click.prevent="decrementQuantity()">
+                                                        <i class="fi-rs-angle-small-down"></i>
+                                                    </a>
+                                                @endif
+                                                <span class="qty-val">{{$quantity}}</span>
+                                                @if($quantity != $product->quantity)
+                                                    <a href="#" class="qty-up" style="top:0;font-size: 16px;position: absolute;right: 8px;color: #707070;" wire:click.prevent="incrementQuantity()">
+                                                        <i class="fi-rs-angle-small-up"></i>
+                                                    </a>
+                                                @endif
+                                            </div>
+                                            <div class="product-extra-link2">
                                                 @if($product->quantity > 0)
-                                                    <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})">Thêm vào giỏ hàng</button>
+                                                    <button type="button" class="button button-add-to-cart" wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}}, {{$quantity}})">Thêm vào giỏ hàng</button>
                                                 @else    
                                                     <button type="button" class="button button-add-to-cart " onclick="addToCart('{{$product->name}}')" >Hết Hàng</button>
                                                 @endif
@@ -128,26 +122,47 @@
                                                     @else
                                                         <a aria-label="Yêu thích" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
                                                     @endif
+                                                @else
+                                                    <a aria-label="Yêu thích" class="action-btn hover-up" href="{{route('login')}}"><i class="fi-rs-heart"></i></a>
                                                 @endif
                                             </div>
-                                           
+                                        </div>
+                                        <div class="mb-20">
+                                            @if($product->quantity > 0)
+                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">{{$product->quantity}}</span></p>
+                                            @else 
+                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">Hết hàng</span></p>
+                                            @endif   
                                         </div>
                                     </div>
-    
                                 </div>
                             </div>
 
                             <div class="tab-style3 mb-20">
                                 <ul class="nav nav-tabs text-uppercase mb-3">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Mô tả sản phẩm</a>
+                                        <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Chi tiết sản phẩm</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content shop_info_tab entry-main-content mt-0">
                                     <div class="tab-pane fade show active" id="Description">
-                                    <div class="">
-                                        {{$product->description}}
-                                    </div>
+                                        <div  class="row bg-success p-3 rounded-3">
+                                            <div class="col-md-4 col-sm-12">
+                                                <div style=" padding: 5px; "><strong>Định dạng : </strong><span> {{$product->cover_type}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Kích Thước : </strong><span> {{$product->size}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Trọng Lượng : </strong><span> {{$product->weight}}g</span></div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <div style=" padding: 5px; "><strong>Số Trang : </strong><span> {{$product->pages}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Trạng thái : </strong><span> {{$product->stock_status}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Ngày Phát Hành : </strong><span> {{$product->release_date}}</span></div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <div style=" padding: 5px; "><strong>ISBN : </strong><span> {{$product->ISBN}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Ngôn ngữ : </strong><span> {{$product->language}}</span></div>
+                                                <div style=" padding: 5px; "><strong>Đối tượng : </strong><span> {{$product->demographic}}</span></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -225,7 +240,7 @@
                                                 <div class="col-lg-8">
                                                     @if($totalRatings > 0) 
                                                     <h4 class="mb-30">Tất cả đánh giá</h4>
-                                                    <div class="comment-list">
+                                                    <div class="comment-list mb-3">
                                                         @foreach($reviews as $review)
                                                             <div class="single-comment justify-content-between d-flex">
                                                                 <div class="user justify-content-between d-flex">
@@ -330,42 +345,42 @@
                                 </div>
                             </div>                            
                         </div>
-                        <div class="col-lg-3 primary-sidebar sticky-sidebar">
-                            <!-- <div class="widget-category mb-30">
-                                <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
-                                <ul class="categories">
-                                    <li><a href="shop.html">Shoes & Bags</a></li>
-                                    <li><a href="shop.html">Blouses & Shirts</a></li>
-                                    <li><a href="shop.html">Dresses</a></li>
-                                    <li><a href="shop.html">Swimwear</a></li>
-                                    <li><a href="shop.html">Beauty</a></li>
-                                    <li><a href="shop.html">Jewelry & Watch</a></li>
-                                    <li><a href="shop.html">Accessories</a></li>
-                                </ul>
-                            </div> -->
-                            <!-- Fillter By Price -->
+                    </div>
+                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                        <!-- <div class="widget-category mb-30">
+                            <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
+                            <ul class="categories">
+                                <li><a href="shop.html">Shoes & Bags</a></li>
+                                <li><a href="shop.html">Blouses & Shirts</a></li>
+                                <li><a href="shop.html">Dresses</a></li>
+                                <li><a href="shop.html">Swimwear</a></li>
+                                <li><a href="shop.html">Beauty</a></li>
+                                <li><a href="shop.html">Jewelry & Watch</a></li>
+                                <li><a href="shop.html">Accessories</a></li>
+                            </ul>
+                        </div> -->
+                        <!-- Fillter By Price -->
+                       
+                        <!-- Product sidebar Widget -->
+                        <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
+                            <div class="widget-header position-relative mb-20 pb-10">
+                                <h5 class="widget-title mb-10">Sản Phẩm Mới</h5>
+                                <div class="bt-1 border-color-1"></div>
+                            </div>
+                            @foreach($nproducts as $nproduct)
+                            <div class="single-post clearfix">
+                                <div class="image">
+                                    <img src="{{asset('assets/imgs/products/products')}}/{{$nproduct->image}}" alt="{{$nproduct->name}}">
+                                </div>
+                                <div class="content pt-10">
+                                    <h5><a href="{{route('product.details',['slug'=>$nproduct->slug])}}">{{substr($nproduct->name,0,50)}}...</a></h5>
+                                    <p class="price mb-0 mt-5">{{number_format($product->regular_price)}} VND</p>
+                                    
+                                </div>
+                            </div>
+                            @endforeach
                            
-                            <!-- Product sidebar Widget -->
-                            <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
-                                <div class="widget-header position-relative mb-20 pb-10">
-                                    <h5 class="widget-title mb-10">Sản Phẩm Mới</h5>
-                                    <div class="bt-1 border-color-1"></div>
-                                </div>
-                                @foreach($nproducts as $nproduct)
-                                <div class="single-post clearfix">
-                                    <div class="image">
-                                        <img src="{{asset('assets/imgs/products/products')}}/{{$nproduct->image}}" alt="{{$nproduct->name}}">
-                                    </div>
-                                    <div class="content pt-10">
-                                        <h5><a href="{{route('product.details',['slug'=>$nproduct->slug])}}">{{substr($nproduct->name,0,50)}}...</a></h5>
-                                        <p class="price mb-0 mt-5">{{number_format($product->regular_price)}} VND</p>
-                                        
-                                    </div>
-                                </div>
-                                @endforeach
-                               
-                            </div>                        
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
