@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('vnp_TxnRef');
             $table->string('vnp_SecureHash');
             $table->timestamps();
-            $table->foreign('vnp_TxnRef')->references('id')->on('orders')->onDelete('restrict');
         });
     }
 
