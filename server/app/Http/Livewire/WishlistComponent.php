@@ -16,7 +16,7 @@ class WishlistComponent extends Component
     }
     public function render()
     {
-        $wishes = Wish::where(['user_id'=> Auth::user()->id])->paginate(1);
+        $wishes = Wish::where(['user_id'=> Auth::user()->id])->paginate(8);
         return view('livewire.wishlist-component', ['wishes'=> $wishes]);
     }
 }
