@@ -47,6 +47,11 @@ Route::group(['middleware' => ['userLogin']], function () {
         Route::get('order/edit/{order_id}', \App\Http\Livewire\Admin\AdminOrderEditComponent::class)->name('admin.order.edit');
     });
 
+    // seller
+    Route::group(['middleware' => 'authSeller', 'prefix'=> 'seller'], function () {
+
+    });
+
     //user
     Route::group(['middleware'=> 'authUser', 'prefix' => 'user'], function () {
         Route::get('orders', UserOrdersComponent::class)->name('user.orders');
