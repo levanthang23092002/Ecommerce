@@ -96,8 +96,7 @@
                                         </div>
 
                                         <div class="detail-extralink">
-                                            <div class="border radius m-auto" style="max-width: 80px;padding: 9px 20px;position: relative;width: 100%;
-    border-radius: 4px;">
+                                            <div class="border radius m-auto" style="max-width: 80px;padding: 9px 20px;position: relative;width: 100%; border-radius: 4px;">
                                                 @if($quantity != 1)
                                                     <a href="#" class="qty-down" style="bottom:0;font-size: 16px;position: absolute;right: 8px;color: #707070;" wire:click.prevent="decrementQuantity()">
                                                         <i class="fi-rs-angle-small-down"></i>
