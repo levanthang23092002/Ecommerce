@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Review_like;
 use App\Models\Wish;
 use Livewire\Component;
 use App\Models\Product;
@@ -77,6 +78,22 @@ class DetailsComponent extends Component
             if($this->quantity > 1) {
                 $this->quantity -= 1;
             }
+        }
+    }
+
+    public function likeReview($review_id) 
+    {
+        if(Auth::check()) {
+            $reviewLike = Review_like::where(['user_id'=> Auth::user()->id,'review_id' => $review_id])->first();
+            if($reviewLike) {
+                $reviewLike->delete();
+                return;            
+            }
+
+            Review_like::create(['review_id' => $review_id, 'user_id' => Auth::user()->id]);
+            return;
+        } else {
+            return redirect()->route('login');
         }
     }
 
