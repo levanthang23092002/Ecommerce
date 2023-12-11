@@ -1,8 +1,13 @@
+import 'package:mobile/page/root_app.dart';
 import 'package:mobile/signUp.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: RootApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
