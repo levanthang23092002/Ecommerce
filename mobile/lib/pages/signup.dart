@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile/theme/colors.dart';
 
 class signUp extends StatelessWidget {
   const signUp({super.key});
@@ -70,7 +71,7 @@ class signUp extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 40, vertical: 70),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 16, 200, 22),
+                      backgroundColor: palm,
                     ),
                     onPressed: () {
                       Navigator.pop(context);
