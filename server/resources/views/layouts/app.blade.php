@@ -138,6 +138,7 @@
 
                                             <li><a href="{{route('shop')}}">Mua sắm</a></li>
                                             <li><a href="{{route('about')}}">Về website</a></li>
+                                            <li><a href="{{route('about')}}">Kênh người bán</a></li>
                                             
                                         </ul>
                                     </nav>
