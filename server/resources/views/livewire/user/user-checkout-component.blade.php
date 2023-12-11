@@ -1,8 +1,8 @@
 <div>
-    @if (Cart::instance('cart')->count() == 0)
-    @php
-    redirect()->route('shop');
-    @endphp
+    @if (Auth::user()->carts->count() === 0)
+        @php
+        redirect()->route('shop');
+        @endphp
     @else
     <main class="main">
         <div class="page-header breadcrumb-wrap">
@@ -41,28 +41,30 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach (Cart::instance('cart')->content() as $item)
+                                        @foreach (Auth::user()->carts as $item)
                                         <tr>
                                             <td class="image product-thumbnail"><img
-                                                    src="{{ asset('assets/imgs/products/products') }}/{{ $item->model->image }}"
+                                                    src="{{ asset('assets/imgs/products/products') }}/{{ $item->product->image }}"
                                                     alt="#"></td>
                                             <td>
                                                 <h5>
                                                     <a
-                                                        href="{{ route('product.details',['slug'=>$item->model->slug]) }}">
-                                                        {{ $item->model->name }}
+                                                        href="{{ route('product.details',['slug'=>$item->product->slug]) }}">
+                                                        {{ $item->product->name }}
                                                     </a>
                                                 </h5>
-                                                <span class="product-qty">x {{ $item->qty }}</span>
+                                                <span class="product-qty">x {{ $item->quantity }}</span>
                                             </td>
-                                            <td>{{number_format(intval(str_replace(',', '',$item->price)))}} VND</td>
-                                            <td>{{number_format(intval(str_replace(',', '',$item->subtotal)))}} VND</td>
+                                            <td>{{number_format(intval(str_replace(',', '',$item->product->regular_price)))}} VND</td>
+                                            <td>{{number_format(intval(str_replace(',', '',$item->product->regular_price * $item->quantity)))}} VND</td>
                                         </tr>
                                         @endforeach
                                         <tr>
                                             <th>Tổng tiền các sản phẩm</th>
                                             <td class="product-subtotal" colspan="3">
-                                                {{number_format(intval(str_replace(',', '',Cart::subtotal())))}} VND
+                                                {{number_format(intval(str_replace(',', '',Auth::user()->carts->sum(function($cart) {
+                                                        return $cart->quantity * $cart->product->regular_price;
+                                                    }))))}} VND
                                             </td>
                                         </tr>
                                         <tr>
@@ -79,7 +81,9 @@
                                             <th>Thành tiền</th>
                                             <td colspan="3" class="product-subtotal"><span
                                                     class="font-xl text-brand fw-900">{{number_format(intval(str_replace(',',
-                                                    '',Cart::total())) +30000)}} VND</span></td>
+                                                    '',Auth::user()->carts->sum(function($cart) {
+                                                        return $cart->quantity * $cart->product->regular_price;
+                                                    }))) +30000)}} VND</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -190,7 +194,7 @@
                                     </div>
                                     @foreach(Cart::instance('cart')->content() as $item)
                                     <input type="hidden" name="products[]"
-                                        value="{{$item->model->id . ';' . $item->qty . ';' . $item->subtotal}}" />
+                                        value="{{$item->product->id . ';' . $item->qty . ';' . $item->subtotal}}" />
                                     @endforeach
                                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}" />
                                     <input type="hidden" name="total"

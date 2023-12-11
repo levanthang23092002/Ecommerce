@@ -5,10 +5,10 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Wish;
+use App\Models\Cart;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
-use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeComponent extends Component
 {
@@ -18,16 +18,21 @@ class HomeComponent extends Component
     public $min_value =0;
     public $max_value = 100000000;
 
-    public function store($product_id, $product_name, $product_price){
-        foreach (Cart::instance('cart')->content() as $cartItem) {
-            if ($cartItem->id == $product_id) {
-                Cart::instance('cart')->remove($cartItem->rowId);
-                break; 
+    public function store($product_id, $product_name, $product_price, $product_quantity = 1)
+    {
+        if(Auth::check()) {
+            $cart = Auth::user()->carts->where('product_id', $product_id)->first();
+            if($cart) {
+                $cart->update(['quantity'=> $product_quantity]);
+                session()->flash('success_message', 'Đã thêm vào giỏ hàng');
+                return redirect()->route('shop.cart');
             }
+    
+            Cart::create(['product_id' => $product_id, 'user_id' => Auth::user()->id, 'quantity' => $product_quantity]);
+            session()->flash('success_message', 'Đã thêm vào giỏ hàng');
+            return redirect()->route('shop.cart');
         }
-        Cart::instance('cart')->add($product_id,$product_name,1,$product_price)->associate('\App\Models\Product');
-        session()->flash('success_message','Item added in Cart');
-        return redirect()->route('shop.cart');
+        return redirect()->route('login');
     }
     public function addToWishlist($product_id, $product_name, $product_price)
     {

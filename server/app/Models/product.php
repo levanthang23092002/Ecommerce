@@ -18,4 +18,8 @@ class product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function user()
+    {
+        return $this->hasOne(User::class,'id' ,'user_id');
+    }
 }

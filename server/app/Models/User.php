@@ -31,6 +31,10 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Wish::class);
     }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
     
     protected $fillable = [
         'name',
@@ -41,6 +45,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'provider_id',
         'provider',
+        'utype',
         'profile_photo_path'
     ]; 
  

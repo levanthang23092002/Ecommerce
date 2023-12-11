@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Livewire\WishlistComponent;
+use App\Http\Controllers\Auth\RegisteredSellerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,8 @@ Route::get('/product-category/{slug}', App\Http\Livewire\CategoryComponent::clas
 Route::get('/search', App\Http\Livewire\SearchComponent::class)->name('product.search');
 Route::get('/About', App\Http\Livewire\AboutComponent::class)->name('about');
 Route::get('/Blog', App\Http\Livewire\BlogComponent::class)->name('blog');
+Route::get('/seller/register', [RegisteredSellerController::class, 'create'])->name('seller.register');
+Route::post('/seller/register', [RegisteredSellerController::class, 'store'])->name('seller.store');
 
 Route::get('/handle-vnpay-return', [CheckoutController::class, 'handleVNPayReturn'])->name('vnpay.return');
 

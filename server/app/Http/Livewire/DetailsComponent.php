@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Review_like;
 use App\Models\Wish;
 use Livewire\Component;
 use App\Models\Product;
-use Gloudemans\Shoppingcart\Facades\Cart;
+use App\Models\Cart;
 use App\Models\Publisher;
 use App\Models\Author;
 use App\Models\Category;
@@ -33,15 +34,19 @@ class DetailsComponent extends Component
 
     public function store($product_id, $product_name, $product_price, $product_quantity = 1)
     {
-        foreach (Cart::instance('cart')->content() as $cartItem) {
-            if ($cartItem->id == $product_id) {
-                Cart::instance('cart')->remove($cartItem->rowId);
-                break; 
+        if(Auth::check()) {
+            $cart = Auth::user()->carts->where('product_id', $product_id)->first();
+            if($cart) {
+                $cart->update(['quantity'=> $product_quantity]);
+                session()->flash('success_message', 'Đã thêm vào giỏ hàng');
+                return redirect()->route('shop.cart');
             }
+    
+            Cart::create(['product_id' => $product_id, 'user_id' => Auth::user()->id, 'quantity' => $product_quantity]);
+            session()->flash('success_message', 'Đã thêm vào giỏ hàng');
+            return redirect()->route('shop.cart');
         }
-        Cart::instance('cart')->add($product_id, $product_name, $product_quantity, $product_price)->associate('\App\Models\Product');
-        session()->flash('success_message', 'Đã thêm vào giỏ hàng');
-        return redirect()->route('shop.cart');
+        return redirect()->route('login');
     }
 
     public function addToWishlist($product_id, $product_name, $product_price)
@@ -73,6 +78,22 @@ class DetailsComponent extends Component
             if($this->quantity > 1) {
                 $this->quantity -= 1;
             }
+        }
+    }
+
+    public function likeReview($review_id) 
+    {
+        if(Auth::check()) {
+            $reviewLike = Review_like::where(['user_id'=> Auth::user()->id,'review_id' => $review_id])->first();
+            if($reviewLike) {
+                $reviewLike->delete();
+                return;            
+            }
+
+            Review_like::create(['review_id' => $review_id, 'user_id' => Auth::user()->id]);
+            return;
+        } else {
+            return redirect()->route('login');
         }
     }
 

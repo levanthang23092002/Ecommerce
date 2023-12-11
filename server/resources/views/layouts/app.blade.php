@@ -48,7 +48,7 @@
                                         @auth
                                         
                                         <ul style="font-size: 16px;text-align: center;">
-                                            <li><img src="{{ asset('assets/imgs/logo/person.png')}}" width="20" height="20" style="margin-right:3px;"> {{ Auth::user()->name }} 
+                                            <li><img src="{{ Auth::user()->profile_photo_path ?? asset('assets/imgs/logo/person.png')}}" width="20" height="20" style="margin-right:3px; border-radius: 50%;"> {{ Auth::user()->name }} 
                                                 <form method="POST" action="{{ route('logout') }}">
                                                     @csrf
                                                     <a href="{{ route('logout') }}"
@@ -158,7 +158,13 @@
 
                                             <li><a href="{{route('shop')}}">Mua sắm</a></li>
                                             <li><a href="{{route('about')}}">Về website</a></li>
-                                            
+                                            @auth
+                                            @if(Auth::user()->utype !== "SELLER" && Auth::user()->utype !== "ADM")
+                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
+                                            @endif
+                                            @else
+                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>
