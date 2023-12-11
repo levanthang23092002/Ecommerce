@@ -25,7 +25,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end">
-                                        <a href="{{ route('admin.product.add') }}" class="btn btn-success btn-sx">Thêm sản phẩm</a>
+                                        <a href="{{ route('seller.product.add') }}" class="btn btn-success btn-sx">Thêm sản phẩm</a>
                                     </div>
                                 </div>
                             </div>
@@ -54,8 +54,8 @@
                                                     <td>{{$product->category->name}}</td>
                                                     <td>{{$product->created_at->timezone('Asia/Ho_Chi_Minh')}}</td>
                                                     <td>
-                                                        <a href="{{route('admin.product.edit', ['product_id'=>$product->id])}}" class="text-info">Chỉnh sửa</a>
-                                                        <a href="{{route('admin.product.delete', ['product_id'=>$product->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>   
+                                                        <a href="{{route('seller.product.edit', ['product_id'=>$product->id])}}" class="text-info">Chỉnh sửa</a>
+                                                        <a href="{{route('seller.product.delete', ['product_id'=>$product->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>   
                                                     </td>
                                                     </tr>
                                                 @endforeach

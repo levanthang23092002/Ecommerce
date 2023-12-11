@@ -98,7 +98,7 @@
                                                     <td>{{ number_format($order->amount, 0, ',', ',') }} VND</td>
                                                     <td>{{$order->created_at->timezone('Asia/Ho_Chi_Minh')}}</td>
                                                     <td>
-                                                    <a href="{{route('admin.order.edit', ['order_id'=>$order->id])}}" class="text-info">Cập nhật</a>
+                                                    <a href="{{route('seller.order.edit', ['order_id'=>$order->id])}}" class="text-info">Cập nhật</a>
                                                     </td>
                                                     </tr>
                                                 @endforeach
