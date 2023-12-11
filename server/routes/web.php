@@ -40,17 +40,18 @@ Route::group(['middleware' => ['userLogin']], function () {
         Route::get('publisher/add', \App\Http\Livewire\Admin\AdminPublisherAddComponent::class)->name('admin.publisher.add');
         Route::get('publisher/edit/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherEditComponent::class)->name('admin.publisher.edit');
         Route::get('publisher/delete/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherDeleteComponent::class)->name('admin.publisher.delete');
-        Route::get('products', \App\Http\Livewire\Admin\AdminProductComponent::class)->name('admin.products');
-        Route::get('product/add', \App\Http\Livewire\Admin\AdminProductAddComponent::class)->name('admin.product.add');
-        Route::get('product/edit/{product_id}', \App\Http\Livewire\Admin\AdminProductEditComponent::class)->name('admin.product.edit');
-        Route::get('product/delete/{product_id}', \App\Http\Livewire\Admin\AdminProductDeleteComponent::class)->name('admin.product.delete');
-        Route::get('orders', \App\Http\Livewire\Admin\AdminOrdersComponent::class)->name('admin.orders');
-        Route::get('order/edit/{order_id}', \App\Http\Livewire\Admin\AdminOrderEditComponent::class)->name('admin.order.edit');
+
     });
 
     // seller
     Route::group(['middleware' => 'authSeller', 'prefix'=> 'seller'], function () {
-
+        Route::get('dashboard', \App\Http\Livewire\Admin\AdminDashBoardComponent::class)->name('seller.dashboard');
+        Route::get('products', \App\Http\Livewire\Admin\AdminProductComponent::class)->name('seller.products');
+        Route::get('product/add', \App\Http\Livewire\Admin\AdminProductAddComponent::class)->name('seller.product.add');
+        Route::get('product/edit/{product_id}', \App\Http\Livewire\Admin\AdminProductEditComponent::class)->name('seller.product.edit');
+        Route::get('product/delete/{product_id}', \App\Http\Livewire\Admin\AdminProductDeleteComponent::class)->name('seller.product.delete');
+        Route::get('orders', \App\Http\Livewire\Admin\AdminOrdersComponent::class)->name('seller.orders');
+        Route::get('order/edit/{order_id}', \App\Http\Livewire\Admin\AdminOrderEditComponent::class)->name('seller.order.edit');
     });
 
     //user

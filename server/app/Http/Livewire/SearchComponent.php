@@ -69,22 +69,24 @@ class SearchComponent extends Component
 
     public function render()
     {   
-        if($this->orderBy == "Giá: thấp đến cao"){
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('name','like',$this->search_term)->orderBy('regular_price', 'ASC')->paginate($this->pageSize); 
+        $query = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])
+            ->where(function ($query) {
+                $query->where('name', 'like', $this->search_term)
+                    ->orWhere('description', 'like', $this->search_term);
+            });
+    
+        if ($this->orderBy == "Giá: thấp đến cao") {
+            $products = $query->orderBy('regular_price', 'ASC')->paginate($this->pageSize); 
+        } elseif ($this->orderBy == "Giá: cao đến thấp") {
+            $products = $query->orderBy('regular_price', 'DESC')->paginate($this->pageSize); 
+        } elseif ($this->orderBy == 'Sản phẩm mới') {
+            $products = $query->orderBy('created_at', 'DESC')->paginate($this->pageSize); 
+        } else {
+            $products = $query->paginate($this->pageSize); 
         }
-        else if($this->orderBy == "Giá: cao đến thấp")
-        {
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('name','like',$this->search_term)->orderBy('regular_price', 'DESC')->paginate($this->pageSize); 
-        }
-        else if($this->orderBy == 'Sản phẩm mới')
-        {
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('name','like',$this->search_term)->orderBy('created_at', 'DESC')->paginate($this->pageSize); 
-        }
-        else {
-            $products = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])->where('name','like',$this->search_term)->paginate($this->pageSize); 
-        }
-        $categories = Category::orderBy('name','ASC')->get();
+    
+        $categories = Category::orderBy('name', 'ASC')->get();
         
-        return view('livewire.search-component', ['products' => $products, 'categories'=>$categories ]);
+        return view('livewire.search-component', ['products' => $products, 'categories' => $categories ]);
     }
 }

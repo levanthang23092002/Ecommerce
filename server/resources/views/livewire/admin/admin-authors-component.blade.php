@@ -1,18 +1,8 @@
 <div>
     <main class="main">
-            <div class="page-header breadcrumb-wrap">
-                <div class="container">
-                    <div class="breadcrumb">
-                        <a href="/" rel="nofollow">Trang chủ</a>
-                        <span></span> Quản lý tác giả
-                    </div>
-                </div>
-            </div>
-            <div style="background-color: #07b55b; color: #fff; padding: 20px 0; text-align: center;">
-                <div class="container">
-                    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color:white;">Quản lý tác giả</h2>
-                </div>
-            </div>
+    <div class="container" style="background-color: #f0f0f0; text-align: center; padding: 20px; margin-bottom: 20px">
+    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: black;">Quản lý tác giả</h2>
+</div>
             <section class="mt-50 mb-50">
                 <div class="container">
                     <div class="row">
@@ -22,7 +12,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-6">
                                         <div class="input-group">
-                                            <input wire:model="search" type="text" class="form-control" placeholder="Tìm kiếm bằng tên..." style="border: 1px solid #ccc; border-radius: 4px;">
+                                            <input wire:model="search" type="text" placeholder="Tìm kiếm bằng tên..." style="border: 1px solid #ccc; border-radius: 4px;">
                                             <button wire:click="clearSearch" class="btn btn-secondary btn-sm">Xoá</button>
                                         </div>
                                     </div>

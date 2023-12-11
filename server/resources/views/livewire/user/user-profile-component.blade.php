@@ -71,6 +71,14 @@
                                                 ?>
                                                 <div class="row">
                                                     <div class="form-group col-md-12">
+                                                        <label>Ảnh đại diện<span class="required">*</span></label>
+                                                        <div>
+                                                            <img src="{{ Auth::user()->profile_photo_path ?? asset('assets/imgs/user.png') }}" alt="Avatar" width="100px" height="100px">
+                                                            <input type="file" name="profile_photo" accept="image/*">
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class="form-group col-md-12">
                                                         <label>Họ tên<span class="required">*</span></label>
                                                         <input required="" class="form-control square" name="name"
                                                             type="text" value="{{Auth::user()->name}}">

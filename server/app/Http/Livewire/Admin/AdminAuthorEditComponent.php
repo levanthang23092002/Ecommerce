@@ -54,6 +54,6 @@ class AdminAuthorEditComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-author-edit-component');
+        return view('livewire.admin.admin-author-edit-component')->layout('layouts.guest');
     }
 }

@@ -39,4 +39,8 @@ class AdminAuthorAddComponent extends Component
 
         session()->flash('message', 'Đã thêm tác giả thành công!');
     }
+    public function render()
+    {
+        return view('livewire.admin.admin-author-add-component')->layout('layouts.guest');
+    }
 }

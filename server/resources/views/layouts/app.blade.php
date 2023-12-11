@@ -133,6 +133,26 @@
                                                     </ul>
 
                                                 </li>
+                                                @elseif(Auth::user()->utype == 'ADM')
+                                                <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
+                                                
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                </ul>
+
+                                                </li>
+                                                <li><a href="{{route('admin.dashboard')}}">Quản lý</a>
+                                                </li>
+                                                @elseif(Auth::user()->utype == 'SELLER')
+                                                <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
+                                                
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                </ul>
+
+                                                </li>
+                                                <li><a href="{{route('seller.dashboard')}}">Quản lý</a>
+                                                </li>
                                                 @endif
                                             @endif
 

@@ -79,9 +79,7 @@
                                         <div>
                                             </div>
                                         </div>
-                                        <div class="short-desc mb-30">
-                                            <p class="font-sm">Mô tả: {{$product->description}}</p>
-                                        </div>
+
                                         <div class="clearfix product-price-cover mb-20">
                                             <div class="product-price primary-color float-left">
                                                 <ins><span class="text-brand">{{number_format($product->regular_price)}} VND</span></ins>
@@ -96,7 +94,14 @@
                                         </div>
 
                                         <div class="detail-extralink">
-                                            <div class="border radius m-auto" style="max-width: 80px;padding: 9px 20px;position: relative;width: 100%; border-radius: 4px;">
+                                        <div class="mb-20" style="margin-top:10px">
+                                            @if($product->quantity > 0)
+                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">{{$product->quantity}} </span></p>
+                                            @else 
+                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">Hết hàng </span></p>
+                                            @endif   
+                                        </div>
+                                            <div class="border radius m-auto" style="max-width: 80px;padding: 9px 20px;position: relative;width: 100%;border-radius: 4px;">
                                                 @if($quantity != 1)
                                                     <a href="#" class="qty-down" style="bottom:0;font-size: 16px;position: absolute;right: 8px;color: #707070;" wire:click.prevent="decrementQuantity()">
                                                         <i class="fi-rs-angle-small-down"></i>
@@ -126,12 +131,9 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="mb-20">
-                                            @if($product->quantity > 0)
-                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">{{$product->quantity}}</span></p>
-                                            @else 
-                                                <p style="font-size:17px">Số lượng:<span class="in-stock text-success ml-5">Hết hàng</span></p>
-                                            @endif   
+
+                                        <div class="short-desc mb-30">
+                                            <p class="font-sm"><strong>Mô tả:</strong> {{$product->description}}</p>
                                         </div>
                                     </div>
                                 </div>

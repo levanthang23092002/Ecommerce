@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Admin</title>
+    <title>Trang Quản Lý</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -45,7 +45,13 @@
         <div class="sidebar pe-4 pb-3">
             <nav class="navbar bg-secondary navbar-dark">
                 <a href="{{route('admin.dashboard')}}" class="navbar-brand mx-4 mb-3">
-                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Trang admin</h3>
+                @auth
+                    @if(Auth::user()->utype == 'SELLER')
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Quản lý shop</h3>
+                    @else
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Trang Admin</h3>
+                    @endif
+                @endif
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
@@ -54,6 +60,7 @@
                     </div>
                     <div class="ms-3">
                         <h6 class="mb-0">{{ Auth::user()->name }}</h6>
+
                         <form method="POST" action="{{ route('logout') }}">
                                                     @csrf
                                                     <a href="{{ route('logout') }}"
@@ -62,10 +69,25 @@
                     </div>
                 </div>
                 <div class="navbar-nav w-100">
-                    <a href="{{route('admin.products')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Sản phẩm</a>
-                    <a href="{{route('admin.orders')}}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Đơn hàng</a>
+                @auth
+                    @if(Auth::user()->utype == 'SELLER')
+                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Shop</a>
+
+                    <a href="{{route('seller.products')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Sản phẩm</a>
+                    <a href="{{route('seller.orders')}}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Đơn hàng</a>
+                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Yêu cầu</a>
+                    <a href="{{route('seller.dashboard')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Thống kê</a>
+                    @else
+                    
+                    <a href="/" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Trang chủ</a>
+
                     <a href="{{route('admin.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Nhà phát hành</a>
                     <a href="{{route('admin.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
+                    <a href="{{route('admin.authors')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Tác giả</a>
+                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Duyệt yêu cầu</a>
+                    <a href="{{route('admin.dashboard')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
+                    @endif
+                @endif
                 </div>
             </nav>
         </div>
