@@ -1,30 +1,16 @@
-import 'package:mobile/signUp.dart';
+import 'package:mobile/pages/root-app.dart';
+import 'package:mobile/pages/signup.dart';
 import 'package:flutter/material.dart';
+import 'package:mobile/theme/colors.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: MyHomePage(),
-    );
-  }
+  State<LoginPage> createState() => _LoginPage();
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePage();
-}
-
-class _MyHomePage extends State<MyHomePage> {
+class _LoginPage extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passController = TextEditingController();
 
@@ -96,7 +82,7 @@ class _MyHomePage extends State<MyHomePage> {
                   style: TextStyle(
                       decoration: TextDecoration.underline,
                       fontSize: 16,
-                      color: Color.fromARGB(255, 16, 200, 22)),
+                      color: palm),
                 ),
                 onTap: () {
                   Navigator.push(context,
@@ -109,7 +95,7 @@ class _MyHomePage extends State<MyHomePage> {
                     top: 50, left: 40, right: 40, bottom: 20),
                 child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromARGB(255, 16, 200, 22),
+                      backgroundColor: palm,
                     ),
                     onPressed: onSignInclicked,
                     child: const SizedBox(
@@ -138,7 +124,7 @@ class _MyHomePage extends State<MyHomePage> {
                     style: TextStyle(
                         decoration: TextDecoration.underline,
                         fontSize: 16,
-                        color: Color.fromARGB(255, 16, 200, 22)),
+                        color: palm),
                   ),
                   onTap: () {
                     Navigator.push(
@@ -242,5 +228,8 @@ class _MyHomePage extends State<MyHomePage> {
     );
   }
 
-  void onSignInclicked() {}
+  void onSignInclicked() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const RootApp()));
+  }
 }
