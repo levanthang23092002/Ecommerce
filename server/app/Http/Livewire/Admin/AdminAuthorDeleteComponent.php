@@ -11,7 +11,7 @@ class AdminAuthorDeleteComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-author-delete-component');
+        return view('livewire.admin.admin-author-delete-component')->layout('layouts.guest');
     }
 
     public function mount($author_id)

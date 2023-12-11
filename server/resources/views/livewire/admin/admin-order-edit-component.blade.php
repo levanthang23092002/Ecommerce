@@ -16,7 +16,7 @@
                                         Cập nhật trạng thái đơn hàng
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('admin.orders')}}" class="btn btn-success float-end">Tất cả đơn hàng</a>
+                                        <a href="{{route('seller.orders')}}" class="btn btn-success float-end">Tất cả đơn hàng</a>
                                         </div>
                                     </div>
                                 </div>

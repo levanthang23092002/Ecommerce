@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container" style="margin-top:100px">
     <div class="row">
         <div class="offset-md-4 col-md-8 text-center">
             <div class="confirmation-box p-4" style="max-width: 400px;">
-                <h4 class="pb-3">Bạn có muốn xoá không?</h4>
+                <h4 class="pb-3" style="color:black">Bạn có muốn xoá không?</h4>
                 <button type="button" class="btn btn-secondary" wire:click="cancelDelete">Trở lại</button>
                 <button type="button" class="btn btn-danger" wire:click="deleteAuthor">Xoá</button>
             </div>
