@@ -23,6 +23,7 @@ class AuthSeller
         }
         else
         {
+            session()->flush();
             return redirect()->route('login')->with(['warning' => 'Bạn cần đăng nhập tài khoản bán hàng để thực hiện hành động này.']);
         }
     }

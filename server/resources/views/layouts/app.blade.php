@@ -158,8 +158,13 @@
 
                                             <li><a href="{{route('shop')}}">Mua sắm</a></li>
                                             <li><a href="{{route('about')}}">Về website</a></li>
-                                            <li><a href="{{route('about')}}">Kênh người bán</a></li>
-                                            
+                                            @auth
+                                            @if(Auth::user()->utype !== "SELLER" && Auth::user()->utype !== "ADM")
+                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
+                                            @endif
+                                            @else
+                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
+                                            @endif
                                         </ul>
                                     </nav>
                                 </div>
