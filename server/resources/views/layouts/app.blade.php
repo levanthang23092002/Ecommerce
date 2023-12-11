@@ -21,6 +21,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+
     @livewireScripts
 </head>
 
@@ -301,6 +302,11 @@
     <!-- Template  JS -->
     <script src="{{ asset ('assets/js/main.js?v=3.3')}}"></script>
     <script src="{{ asset ('assets/js/shop.js?v=3.3')}}"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+
     
   
   <!-- Messenger Plugin chat Code -->

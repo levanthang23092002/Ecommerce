@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Response_review;
 use App\Models\Review_like;
 use App\Models\Wish;
 use Livewire\Component;
@@ -20,7 +21,7 @@ class DetailsComponent extends Component
     public $slug;
     public $rating;
     public $comment;
-
+    public $responseReview;
     public $quantity;
     public $product;
 
@@ -94,6 +95,31 @@ class DetailsComponent extends Component
             return;
         } else {
             return redirect()->route('login');
+        }
+    }
+
+    public function showModal($reviewId)
+    {
+        $this->responseReview = Response_review::where(['review_id' => $reviewId])->value('comment') ?? '';
+        return;
+    }
+
+    public function sendResponseReview($reviewId)
+    {
+        if(!$this->responseReview) {
+            return;
+        }
+
+        if(Auth::check() && Auth::user()->utype === "SELLER") {
+            if(Review::where('id', $reviewId)->exists()) {
+                if(Response_review::where(['review_id'=> $reviewId])->exists()) {
+                    Response_review::where(['review_id'=> $reviewId])->update(['comment' => $this->responseReview]);
+                    $this->responseReview = "";
+                    return;
+                }
+                Response_review::create(['review_id' => $reviewId, 'comment' => $this->responseReview]);        
+                $this->responseReview = "";
+            }
         }
     }
 
