@@ -14,7 +14,7 @@
                                         Thêm sản phẩm mới
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('admin.products')}}" class="btn btn-success float-end">Tất cả sản phẩm</a>
+                                        <a href="{{route('seller.products')}}" class="btn btn-success float-end">Tất cả sản phẩm</a>
                                         </div>
                                     </div>
                                 </div>

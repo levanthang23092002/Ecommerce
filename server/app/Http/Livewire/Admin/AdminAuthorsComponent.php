@@ -16,7 +16,7 @@ class AdminAuthorsComponent extends Component
             ->orderBy('id', 'ASC')
             ->paginate(5);
     
-            return view('livewire.admin.admin-authors-component',['authors'=>$authors]);
+            return view('livewire.admin.admin-authors-component',['authors'=>$authors])->layout('layouts.guest');
     }
 
     public function clearSearch()
