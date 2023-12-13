@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\Response_review;
 use App\Models\Review_like;
+use App\Models\User;
 use App\Models\Wish;
 use Livewire\Component;
 use App\Models\Product;
@@ -190,6 +191,7 @@ class DetailsComponent extends Component
             $publisher = Publisher::where('id', $this->product->publisher_id)->first();
             $author = Author::where('id', $this->product->author_id)->first();
             $reviews = Review::where('product_id', $this->product->id)->orderBy('updated_at', 'desc')->paginate(5);
+            $wishCount = Wish::where('product_id' , $this->product->id)->count();
 
             return view('livewire.details-component', [
                 'product' => $this->product,
@@ -200,6 +202,8 @@ class DetailsComponent extends Component
                 'author' => $author,
                 'reviews' => $reviews,
                 'quantity' => $this->quantity,
+                'wishCount' => $wishCount,
+                'seller' => User::where('id', $this->product->user_id)->first(),
             ]);
         }else{
             return view('livewire.details-component', [
@@ -211,6 +215,7 @@ class DetailsComponent extends Component
                 'author' => null,
                 'reviews' => null,
                 'quantity' => 0,
+                'wishCount' => 0,
             ]);
         }
        

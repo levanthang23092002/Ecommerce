@@ -71,7 +71,7 @@
                 <div class="navbar-nav w-100">
                 @auth
                     @if(Auth::user()->utype == 'SELLER')
-                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Shop</a>
+                    <a href="{{route('shop', ['seller_id' => Auth::user()->id])}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Shop</a>
 
                     <a href="{{route('seller.products')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Sản phẩm</a>
                     <a href="{{route('seller.orders')}}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Đơn hàng</a>

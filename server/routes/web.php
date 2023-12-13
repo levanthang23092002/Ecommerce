@@ -68,7 +68,8 @@ Route::group(['middleware' => ['userLogin']], function () {
 
 // Guest
 Route::get('/', HomeComponent::class)->name('home.index');
-Route::get('/shop', ShopComponent::class)->name('shop');
+// Route::get('/shop', ShopComponent::class)->name('shop');
+Route::get('/shop/{seller_id}', ShopComponent::class)->name('shop');
 Route::get('/cart', CartComponent::class)->name('shop.cart');
 Route::get('/product/{slug}', DetailsComponent::class)->name('product.details');
 Route::get('/products{category_id}', DetailsComponent::class)->name('product.detailss');

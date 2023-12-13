@@ -79,7 +79,7 @@
                         </div>
                         <div class="cart-action text-end">
                          
-                            <a class="btn " href="{{route('shop')}}"><i class="fi-rs-shopping-bag mr-10"></i>Tiếp Tục Mua sắm</a>
+                            <a class="btn " href="{{route('home.index')}}"><i class="fi-rs-shopping-bag mr-10"></i>Tiếp Tục Mua sắm</a>
                         </div>
                         <div class="divider center_icon mt-50 mb-50"><i class="fi-rs-fingerprint"></i></div>
                         <div class="row mb-50">

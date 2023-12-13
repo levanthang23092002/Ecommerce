@@ -14,12 +14,18 @@ class product extends Model
     {
         return $this->hasMany(Review::class);
     }
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
     public function user()
     {
-        return $this->hasOne(User::class,'id' ,'user_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function wishes()
+    {
+        return $this->hasMany(Wish::class, 'product_id', 'id');
     }
 }
