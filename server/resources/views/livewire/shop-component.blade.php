@@ -21,11 +21,33 @@
         <section class="mt-50 mb-50">
             <div class="container">
                 <div class="row">
+                    @if($seller)
+                        <div class="col-lg-12">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-5">
+                                        <div class="rounded-circle img-thumbnail"
+                                            style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$seller->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                        </div>
+                                        <div class="d-flex flex-column align-items-start">
+                                            <h4>{{$seller->name}}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                                @if($seller->shop_desc)
+                                <div class="card-body">
+                                    <h5 class="card-title">Giới thiệu</h5>
+                                    <p class="card-text">{{$seller->shop_desc}}</p>
+                                </div>
+                                @endif
+                                </div>
+                        </div>
+                    @endif
+                    
                     <div class="col-lg-9">
                         <div class="shop-product-fillter">
                             <div class="totall-product">
-                                <p> Chúng tôi đã tìm thấy <strong class="text-brand">{{$products->total()}}</strong> sản phẩm cho bạn!
-                                </p>
+                                
                             </div>
                             <div class="sort-by-product-area">
                                 <div class="sort-by-cover mr-10">
@@ -213,6 +235,7 @@
 @push('scripts')
     <script>
         var sliderrange = $('#slider-range');
+        console.log(sliderrange.slider);
         var amountprice = $('#amount');
         $(function() {
             sliderrange.slider({

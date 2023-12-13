@@ -47,21 +47,48 @@
                                 <div class="header-action-right">
                                     <div class="header-action-2">
                                         @auth
+                                        <div class="btn-group dropdown">
+                                            <a class="d-flex gap-1 align-items-center" href="#" data-bs-toggle="dropdown">
+                                            <div class="rounded-circle img-thumbnail"
+                                                style="width: 30px; height: 30px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{Auth::user()->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                            </div>
+                                                {{ Auth::user()->name }}
+                                                @if(Auth::user()->utype === "SELLER")
+                                                <span class="badge bg-warning  text-dark">Seller</span>
+                                                @elseif(Auth::user()->utype === "ADM")
+                                                <span class="badge bg-danger text-light">Amin</span>
+                                                @endif
+                                                <i class="fi-rs-angle-down"></i>
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                @if(Auth::user()->utype == 'USR')
+                                                <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                @elseif(Auth::user()->utype == 'ADM')
+                                                <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Quản trị</a></li>
+                                                @elseif(Auth::user()->utype == 'SELLER')
+                                                <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Bán hàng</a></li>
+                                                </li>
+                                                @endif
+                                                <hr class="dropdown-divider">
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+                                                        <button class="dropdown-item text-danger"
+                                                            onClick="event.preventDefault(); this.closest('form').submit();">Đăng xuất</button>
+                                                    </form>
+                                                </li>
+                                            </ul>
+                                        </div>
                                         
-                                        <ul style="font-size: 16px;text-align: center;">
-                                            <li><img src="{{ Auth::user()->profile_photo_path ?? asset('assets/imgs/logo/person.png')}}" width="20" height="20" style="margin-right:3px; border-radius: 50%;"> {{ Auth::user()->name }} 
-                                                <form method="POST" action="{{ route('logout') }}">
-                                                    @csrf
-                                                    <a href="{{ route('logout') }}"
-                                                        onClick="event.preventDefault(); this.closest('form').submit();">Đăng xuất</a>
-                                                </form>
-                                            </li>
-                                        </ul>
                                         @else
-                                        <img src="{{ asset('assets/imgs/login.png')}}" width="17" height="17" style="margin-right:2px;margin-bottom:1px"><a href="{{ route('login') }}">
-                                        <ul style="font-size: 16px;">
-                                            <li> Đăng nhập </a> /
-                                                <a href="{{ route('register') }}">Đăng ký</a></li>
+                                        <img src="{{ asset('assets/imgs/login.png')}}" width="17" height="17" style="margin-right:2px;margin-bottom:1px"><a
+                                            href="{{ route('login') }}">
+                                            <ul style="font-size: 16px;">
+                                                <li> Đăng nhập
+                                        </a> /
+                                        <a href="{{ route('register') }}">Đăng ký</a></li>
                                         </ul>
                                         @endif
                                     </div>
@@ -125,39 +152,11 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                            @auth
-                                                @if(Auth::user()->utype == 'USR')
-                                                 <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
-                                                
-                                                    <ul class="sub-menu">
-                                                        <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                    </ul>
-
-                                                </li>
-                                                @elseif(Auth::user()->utype == 'ADM')
-                                                <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
-                                                
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                </ul>
-
-                                                </li>
-                                                <li><a href="{{route('admin.dashboard')}}">Quản lý</a>
-                                                </li>
-                                                @elseif(Auth::user()->utype == 'SELLER')
-                                                <li><a href="#">Tài khoản<i class="fi-rs-angle-down"></i></a>
-                                                
-                                                <ul class="sub-menu">
-                                                    <li><a href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                </ul>
-
-                                                </li>
-                                                <li><a href="{{route('seller.dashboard')}}">Quản lý</a>
-                                                </li>
-                                                @endif
+                                            @if(Auth::check() && Auth::user()->utype === "SELLER")
+                                                <li><a href="{{route('shop', ['seller_id' => Auth::user()->id])}}">Cửa hàng của bạn</a></li>
+                                            @else
+                                                <li><a href="{{route('shop', ['seller_id' => 'all'])}}">Mua sắm</a></li>
                                             @endif
-
-                                            <li><a href="{{route('shop')}}">Mua sắm</a></li>
                                             <li><a href="{{route('about')}}">Về website</a></li>
                                             @auth
                                             @if(Auth::user()->utype !== "SELLER" && Auth::user()->utype !== "ADM")
@@ -303,9 +302,8 @@
     <script src="{{ asset ('assets/js/main.js?v=3.3')}}"></script>
     <script src="{{ asset ('assets/js/shop.js?v=3.3')}}"></script>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"></script>
 
     
   

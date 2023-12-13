@@ -9,9 +9,9 @@
     }
 </style>
 @livewireStyles
-<main class="main">
+<main class="main" >
 
-        <section class="home-slider position-relative pt-50">
+        <section class="home-slider position-relative pt-50" wire:ignore>
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
                 <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
@@ -22,7 +22,7 @@
                                     <h2 class="animated fw-900">BLACK FIDAY</h2>
                                     <h1 class="animated fw-900 text-brand">Giảm giá đến 70%</h1>
                                     <p class="animated">Cho tất cả sản phẩm</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="{{route('shop')}}"> Mua ngay </a>
+                                    <a class="animated btn btn-brush btn-brush-3" href="{{route('home.index')}}"> Mua ngay </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -42,7 +42,7 @@
                                     <h2 class="animated fw-900">Ngày Giáng Sinh</h2>
                                     <h1 class="animated fw-900 text-7">Truyện trọn bộ</h1>
                                     <p class="animated">Tiết kiệm đén 20%</p>
-                                    <a class="animated btn btn-brush btn-brush-2" href="{{route('shop')}}"> Mua ngay  </a>
+                                    <a class="animated btn btn-brush btn-brush-2" href="{{route('home.index')}}"> Mua ngay  </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -72,7 +72,7 @@
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Mới nhất</button>
                         </li>
                     </ul>
-                    <a href="{{route('shop')}}" class="view-more d-none d-md-flex">Xem thêm<i class="fi-rs-angle-double-small-right"></i></a>
+                    <a href="{{route('home.index')}}" class="view-more d-none d-md-flex">Xem thêm<i class="fi-rs-angle-double-small-right"></i></a>
                 </div>
 
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
@@ -141,7 +141,7 @@
            
             </div>
         </section>
-        <section class="featured section-padding position-relative">
+        <section class="featured section-padding position-relative" wire:ignore>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
@@ -183,7 +183,7 @@
                 </div>
             </div>
         </section>        
-        <section class="section-padding">
+        <section class="section-padding" wire:ignore>
             <div class="container wow fadeIn animated">
                 <h3 class="section-title mb-20">Sản phẩm <span> MỚI</span></h3>
                 <div class="carausel-6-columns-cover position-relative">
@@ -220,7 +220,7 @@
             </div>
         </section>
        
-        <section class="section-padding">
+        <section class="section-padding" wire:ignore>
             <div class="container">
                 <h3 class="section-title mb-20 wow fadeIn animated"><span>Các hãng </span>đối tác</h3>
                 <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
