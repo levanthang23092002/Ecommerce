@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use \App\Models\Order;
+use \App\Models\Cart;
 use \App\Models\Order_item;
 use \App\Models\vnpay_payments;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use \App\Models\product;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,7 +40,7 @@ class CheckoutController extends Controller
             'city' => 'Thành phố',
             'payment_option' => 'Phương thức thanh toán',
         ]);
-        
+
         $data = $request->all();
         $orderId = date('YmdHis');
         $orderItems = [];
@@ -56,33 +56,34 @@ class CheckoutController extends Controller
                 'payment_status' => 0,
                 'order_status' => 0,
                 'tax' => intval(str_replace(',', '', $data['tax'])),
-                'sub_total' => intval(str_replace(',', '', $data['sub_total'])),
+                'sub_total' => intval(str_replace(',', '', Auth::user()->carts->sum(function($cart) {
+                    return $cart->quantity * $cart->product->regular_price;
+                }))),
                 'shipping' => intval(str_replace(',', '', $data['shipping'])),
-                'amount' => intval(str_replace(',', '', $data['total'])),
+                'amount' => intval(str_replace(',', '', Auth::user()->carts->sum(function($cart) {
+                    return $cart->quantity * $cart->product->regular_price;
+                }) + $data['shipping'])),
                 'note' => $data['note'],
             ]);
 
-            foreach ($data['products'] as $value) {
-                $productQuery = explode(';', $value);
-                $productId = $productQuery[0];
-                $orderedQuantity = intval($productQuery[1]);
-                $product = Product::find($productId);
+            foreach (Auth::user()->carts as $cartItem) {
+                $product = $cartItem->product;
                 if (!$product) {
                     return back()->withErrors('Không tìm thấy sản phẩm bạn cần đặt hàng.');
                 }
 
-                $availableQuantity = $product['quantity'];
+                $availableQuantity = $product->quantity;
 
                 // Kiểm tra xem có đủ sản phẩm để giảm quantity hay không
-                if ($availableQuantity >= $orderedQuantity) {
+                if ($availableQuantity >= $cartItem->quantity) {
                     // decrement quantity của sản phẩm
-                    product::where('id', $productId)->decrement('quantity', $orderedQuantity);
+                    product::where('id', $cartItem->product_id)->decrement('quantity', $cartItem->quantity);
 
                     array_push($orderItems, new Order_Item([
                         'order_id' => $orderId,
-                        'product_id' => $productId,
-                        'quantity' => $orderedQuantity,
-                        'amount' => intval($product['regular_price']) * intval($orderedQuantity)
+                        'product_id' => $cartItem->product_id,
+                        'quantity' => $cartItem->quantity,
+                        'amount' => intval($product->regular_price) * intval($cartItem->quantity)
                     ]));
                 } else {
                     // Xử lý tình huống khi không đủ sản phẩm
@@ -95,10 +96,12 @@ class CheckoutController extends Controller
 
             if ($data["payment_option"] == "cod") {
                 $order->save();
-                foreach ($orderItems as $value) {
-                    $value->save();
+                foreach ($orderItems as $item) {
+                    $item->save();
                 }
-                Cart::instance('cart')->destroy();
+                Auth::user()->carts->each(function ($cart) {
+                    $cart->delete();
+                });
                 return redirect()->route('user.order_detail', ['order_id' => $orderId])->with('success', 'Đặt hàng thành công');
 
             } else if ($data["payment_option"] == "vnp") {
@@ -110,7 +113,7 @@ class CheckoutController extends Controller
                 $vnp_TxnRef = $orderId;
                 $vnp_OrderInfo = 'Payment order on Bookstore';
                 $vnp_OrderType = 'billpayment';
-                $vnp_Amount = intval(str_replace(',', '', $data['total'])) * 100;
+                $vnp_Amount = intval(str_replace(',', '', $order['amount'])) * 100;
                 $vnp_Locale = 'vn';
                 $vnp_BankCode = "";
                 $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -250,7 +253,11 @@ class CheckoutController extends Controller
 
                             $payment->save();
                             $message = 'Thanh toán thành công';
-                            Cart::instance('cart')->destroy();
+                            if(Auth::check()) {
+                                Auth::user()->carts->each(function ($cart) {
+                                    $cart->delete();
+                                });
+                            }
                             return redirect()->route('user.payment_result')->with(['message' => $message, 'messageType' => 'success', 'order_id' => $orderId]);
                         } else {
                             $message = 'Đơn hàng đã được thanh toán';

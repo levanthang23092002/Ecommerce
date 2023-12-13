@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('utype')->default('USR');
             $table->string('provider_id')->nullable();
             $table->string('provider')->nullable();
+            $table->string('shop_desc')->nullable();
             $table->rememberToken();
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();

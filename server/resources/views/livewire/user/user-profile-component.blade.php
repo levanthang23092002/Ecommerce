@@ -62,7 +62,7 @@
                                         <div class="card-body">
                                             <form method="post" action="{{route('profile.update')}}">
                                                 @csrf
-                                                @method('put')
+                                                @method('patch')
                                                 <?php
                                                     if(isset(Auth::user()->address)) {
                                                         $address = explode(',', Auth::user()->address);
@@ -73,7 +73,7 @@
                                                     <div class="form-group col-md-12">
                                                         <label>Ảnh đại diện<span class="required">*</span></label>
                                                         <div>
-                                                            <img src="{{ Auth::user()->profile_photo_path ?? asset('assets/imgs/user.png') }}" alt="Avatar" width="100px" height="100px">
+                                                            <img src="{{ Auth::user()->profile_photo_path ?? asset('assets/imgs/user.png') }}" alt="Avatar" width="100px" height="100px" style="border-radius: 50%;">
                                                             <input type="file" name="profile_photo" accept="image/*">
                                                         </div>
                                                     </div>

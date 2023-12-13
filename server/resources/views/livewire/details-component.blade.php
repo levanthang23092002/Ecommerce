@@ -244,24 +244,62 @@
                                                     <div class="comment-list mb-3">
                                                         @foreach($reviews as $review)
                                                             <div class="single-comment justify-content-between d-flex">
-                                                                <div class="user justify-content-between d-flex">
+                                                                <div class="user justify-content-between d-flex w-100">
                                                                     <div class="thumb text-center">
                                                                         <!-- <img src="{{ asset('assets/imgs/user.png')}}" alt=""> -->
                                                                         <img src="{{$review->user->profile_photo_path ?? asset('assets/imgs/user.png')}}" alt="">
-                                                                        <h6><a href="#">{{$review->user->name}}</a></h6>
                                                                     </div>
-                                                                    <div class="desc">
-                                                                        <div class="product-rate d-inline-block">
+                                                                    <div class="desc w-100">
+                                                                        <div class="d-flex align-items-center gap-1">
+                                                                            <h6><a href="#">{{$review->user->name}}</a></h6>
+                                                                            <p class="font-xs">{{ $review->updated_at->timezone('Asia/Ho_Chi_Minh')->format('H:i d-m-Y')}} </p>
+                                                                        </div>
+                                                                        <div class="product-rate d-inline-block p-0">
                                                                             <div class="product-rating" style="width:{{$review->rating * 20}}%">
                                                                             </div>
                                                                         </div>
-                                                                        <p>{{$review->comment}}</p>
-                                                                        <div class="d-flex justify-content-between">
-                                                                            <div class="d-flex align-items-center">
-                                                                                <p class="font-xs mr-30">{{ $review->created_at->timezone('Asia/Ho_Chi_Minh')->format('H:i d-m-Y')}} </p>
-                                                                                <!-- <a href="#" class="text-brand btn-reply">Reply <i class="fi-rs-arrow-right"></i> </a> -->
-                                                                            </div>
+                                                                        <p class="mb-3">{{$review->comment}}</p>
+                                                                        
+                                                                        @if($review->response_review)
+                                                                        <div class="p-3 alert alert-secondary">
+                                                                            <h5>Phản hồi của người bán</h5>
+                                                                            <p>{{$review->response_review->comment}}</p>
+                                                                            <p class="font-xs mr-30">{{$review->response_review->updated_at->timezone('Asia/Ho_Chi_Minh')->format('H:i d-m-Y')}} </p>
                                                                         </div>
+                                                                        @endif
+                                                                        <div class="d-flex">
+
+                                                                            <a aria-label="" class="action-btn hover-up d-flex gap-1 align-items-center" href="#" style="color: {{Auth::check() && $review->review_likes->where('user_id', Auth::user()->id)->first() ? '#07b55b' : '#999'}};" wire:click.prevent="likeReview({{$review->id}})">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="18" height="18" fill="{{Auth::check() && $review->review_likes->where('user_id', Auth::user()->id)->first() ? '#07b55b' : '#999'}}"><path d="M6,8H3a3,3,0,0,0-3,3v8a3,3,0,0,0,3,3H6Z"/><path d="M14,8l.555-3.328a2.269,2.269,0,0,0-1.264-2.486,2.247,2.247,0,0,0-2.9,1.037L8,8V22H22l2-11V8Z"/></svg>
+                                                                                {{$review->review_likes && $review->review_likes->count() > 0 ? (Auth::check() && $review->review_likes->where('user_id', Auth::user()->id)->first() ? 'Đã thích' : '') .  ' (' . $review->review_likes->count() . ')' : 'Hữu ích?'}}
+                                                                            </a>
+                                                                            @auth
+                                                                                @if(Auth::user()->utype === 'SELLER' && $product->user_id === Auth::user()->id)
+                                                                                    <a href="#" data-toggle="modal" wire:click.prevent="showModal({{$review->id}})" data-target="#itemModal{{ $review->id }}" class="text-brand btn-reply">Phản hồi<i class="fi-rs-arrow-right"></i> </a>
+                                                                                    <!-- Modal -->
+                                                                                    <div wire:ignore class="modal fade" id="itemModal{{ $review->id }}" tabindex="-1" role="dialog" aria-labelledby="itemModalLabel{{ $review->id }}" aria-hidden="true">
+                                                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                                                            <div class="modal-content">
+                                                                                                <div class="modal-header">
+                                                                                                    <h5 class="modal-title" id="itemModalLabel{{ $review->id }}">Trả lời bình luận của {{ $review->user->name }}</h5>
+                                                                                                    <button type="button" class="close rounded-circle pe-2 ps-2" data-dismiss="modal" aria-label="Close">
+                                                                                                        <span aria-hidden="true">&times;</span>
+                                                                                                    </button>
+                                                                                                </div>
+                                                                                                <div class="modal-body">
+                                                                                                    <textarea class="form-control"  wire:model="responseReview" id="exampleFormControlTextarea1" rows="5"></textarea>
+                                                                                                </div>
+                                                                                                <div class="modal-footer">
+                                                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                                                                                                    <button type="button" wire:click.prevent="sendResponseReview({{$review->id}})" class="btn btn-primary" data-dismiss="modal">Gửi</button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endif
+                                                                            @endif
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
