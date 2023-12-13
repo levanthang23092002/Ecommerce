@@ -27,8 +27,8 @@
                 <div class="row">
                     <div class="col-lg-9">
                         <div class="product-detail accordion-detail">
-                            <div class="row mb-50">
-                                <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="row mb-5">
+                                <div class="col-md-6 col-sm-12 col-xs-12" wire:ignore>
                                     <div class="detail-gallery">
                                         <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                         <div class="product-image-slider">
@@ -129,6 +129,7 @@
                                                 @else
                                                     <a aria-label="Yêu thích" class="action-btn hover-up" href="{{route('login')}}"><i class="fi-rs-heart"></i></a>
                                                 @endif
+                                                (Đã thích {{$wishCount}})
                                             </div>
                                         </div>
 
@@ -136,6 +137,16 @@
                                             <p class="font-sm"><strong>Mô tả:</strong> {{$product->description}}</p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-50">
+                                <div class="rounded-circle img-thumbnail"
+                                    style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$product->user->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                </div>
+                                <div class="d-flex flex-column align-items-start">
+                                <h5>{{$product->user->name}}</h5>
+                                <a href="{{route('shop', ['seller_id' => $product->user->id])}}" class="rounded p-2 border btn-outline-secondary">Xem shop</a>
                                 </div>
                             </div>
 
@@ -385,7 +396,7 @@
                             </div>                            
                         </div>
                     </div>
-                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                    <div class="col-lg-3 primary-sidebar sticky-sidebar" wire:ignore>
                         <!-- <div class="widget-category mb-30">
                             <h5 class="section-title style-1 mb-30 wow fadeIn animated">Category</h5>
                             <ul class="categories">
