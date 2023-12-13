@@ -187,7 +187,7 @@
                             </nav> -->
                         </div>
                     </div>
-                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                    <div class="col-lg-3 primary-sidebar">
                     <div class=" sidebar-widget price_range range mb-30">
                             <div class="widget-header position-relative mb-20 pb-10">
                                 <h5 class="widget-title mb-10">Lọc Theo Giá</h5>
