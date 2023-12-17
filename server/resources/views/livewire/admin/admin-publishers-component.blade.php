@@ -17,7 +17,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end">
-                                        <a href="{{ route('admin.publisher.add') }}" class="btn btn-success btn-sx">Thêm nhà phát hành</a>
+                                        <a href="{{ route('seller.publisher.add') }}" class="btn btn-success btn-sx">Thêm nhà phát hành</a>
                                     </div>
                                 </div>
                             </div>
@@ -38,8 +38,8 @@
                                                         <td>{{$publisher->name}}</td>
                                                         <td>{{$publisher->slug}}</td>
                                                         <td>
-                                                        <a href="{{route('admin.publisher.edit', ['publisher_id'=>$publisher->id])}}" class="text-info">Chỉnh sửa</a>
-                                                        <a href="{{route('admin.publisher.delete', ['publisher_id'=>$publisher->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>   
+                                                        <a href="{{route('seller.publisher.edit', ['publisher_id'=>$publisher->id])}}" class="text-info">Chỉnh sửa</a>
+                                                        <a href="{{route('seller.publisher.delete', ['publisher_id'=>$publisher->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>   
                                                         </td>
                                                     </tr>
                                                 @endforeach

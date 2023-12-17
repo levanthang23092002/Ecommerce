@@ -10,13 +10,14 @@ use App\Models\Author;
 use App\Models\Publisher;
 use Livewire\WithFileUploads;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Auth;
 
 
 class AdminProductAddComponent extends Component
 {
     use WithFileUploads;
     public $name;
+    public $user;
     public $slug;
     public $description;
     public $regular_price = 10000;
@@ -108,7 +109,9 @@ class AdminProductAddComponent extends Component
             'author_id' => 'required',
             'publisher_id' => 'required',
             ]);
+            $user = auth()->user();
             $product = new Product();
+            $product->user_id = $user->id;
             $product->name = $this->name;
             $product->slug = $this->slug;
             $product->description = $this->description;
@@ -133,7 +136,7 @@ class AdminProductAddComponent extends Component
             $product->save();
     
             session()->flash('message', 'Thêm sản phẩm thành công!');
-            return redirect()->route('admin.product.add');
+            return redirect()->route('seller.product.add');
     }
     public function render()
     {

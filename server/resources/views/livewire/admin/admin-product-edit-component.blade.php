@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="mb-3 mt-3 " wire:ignore>
                                         <label for="category_id " class="form-label">Danh mục</label>
-                                        <select class="form-control " name="category_id" wire:model="category_id" id="categorySelect" >
+                                        <select class="form-control " style="background-color:white" name="category_id" wire:model="category_id" id="categorySelect" >
                                             <option value="">Chọn danh mục</option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
