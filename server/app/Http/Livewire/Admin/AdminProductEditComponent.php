@@ -158,7 +158,7 @@ class AdminProductEditComponent extends Component
             $product->save();
     
             session()->flash('message', 'Đã cập nhật sản phẩm thành công!');
-            return redirect()->route('admin.product.edit', ['product_id' => $this->product_id]);
+            return redirect()->route('seller.product.edit', ['product_id' => $this->product_id]);
     }
 
     public function render()

@@ -37,7 +37,7 @@ class AdminProductDeleteComponent extends Component
 
     public function cancelDelete()
     {
-        return redirect('/admin/products');
+        return redirect('/seller/products');
 
     }
 
