@@ -7,6 +7,7 @@ use App\Http\Livewire\User\UserPaymentResultComponent;
 use App\Http\Livewire\ShopComponent;
 use App\Http\Livewire\User\UserCheckoutComponent;
 use App\Http\Livewire\User\UserOrdersComponent;
+use App\Http\Livewire\User\UserUpgradeToSeller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Controllers\CheckoutController;
@@ -56,7 +57,10 @@ Route::group(['middleware' => ['userLogin']], function () {
     });
 
     //user
-    Route::group(['middleware'=> 'authUser', 'prefix' => 'user'], function () {
+    Route::group(['prefix' => 'user'], function () {
+        Route::group(['middleware' => 'authUser'], function () {
+            Route::get('upgrade-to-seller', UserUpgradeToSeller::class)->name('user.upgrade_seller');
+        });
         Route::get('orders', UserOrdersComponent::class)->name('user.orders');
         Route::post('place-order', [CheckoutController::class, 'payment'])->name('user.payment');
         Route::get('order-detail/{order_id}', [OrderController::class, 'show'])->name('user.order_detail');

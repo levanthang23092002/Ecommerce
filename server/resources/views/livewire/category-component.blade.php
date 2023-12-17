@@ -147,7 +147,7 @@
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             @livewireStyles
-                            {{$products->links()}}
+                            {{$products->links('pagination::bootstrap-4')}}
                             @livewireScripts
 
 
@@ -165,7 +165,7 @@
                     </div>
                     
 
-                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                    <div class="col-lg-3 primary-sidebar">
                         <div class="row">
                             <div class="col-lg-12 col-mg-6"></div>
                             <div class="col-lg-12 col-mg-6"></div>

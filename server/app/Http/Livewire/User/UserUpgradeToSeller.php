@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
-class UserProfileComponent extends Component
+class UserUpgradeToSeller extends Component
 {
     use WithFileUploads;
 

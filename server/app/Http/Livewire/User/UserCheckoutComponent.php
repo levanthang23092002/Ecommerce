@@ -21,7 +21,7 @@ class UserCheckoutComponent extends Component
         if($address) {
             $this->city = array_reverse(explode(',', $address))[0];
             $this->district = array_reverse(explode(',', $address))[1];
-            $this->ward = array_reverse(explode(',', $address))[3];
+            $this->ward = array_reverse(explode(',', $address))[2];
         }
     }
 
@@ -101,15 +101,15 @@ class UserCheckoutComponent extends Component
                 $seller = User::where('id', $sellerId)->first();
                 $sellerCity = array_reverse(explode(',', $seller->address))[0];
                 $sellerDistrict = array_reverse(explode(',', $seller->address))[1];
-                $shipFee = $carts->sum(function ($cart) {
+                $weight = $carts->sum(function ($cart) {
                     return $cart->quantity * $cart->product->weight;
                 });
-                if($shipFee === -1) {
+                if($weight === -1) {
                     return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Địa chỉ này không được hỗ trợ giao hàng']); 
-                } elseif ($shipFee === -2) {
+                } elseif ($weight === -2) {
                     return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Xảy ra lỗi trong quá trình tính phí giao hàng']); 
                 }
-                $this->shipFees[$sellerId] = $this->calculatorShipFee($sellerCity, $sellerDistrict, $this->city, $this->district, $shipFee);
+                $this->shipFees[$sellerId] = $this->calculatorShipFee($sellerCity, $sellerDistrict, $this->city, $this->district, $weight);
             }
         }
         return view('livewire.user.user-checkout-component', ['shipFees' => $this->shipFees]);

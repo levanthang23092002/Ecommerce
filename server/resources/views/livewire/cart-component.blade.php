@@ -47,7 +47,7 @@
                                         <a class="d-flex gap-2 mt-2 mb-2 align-items-center ms-lg-4"
                                             href="{{route('shop', ['seller_id' => $sellerId])}}">
                                             <div class="rounded-circle img-thumbnail"
-                                                style="width: 50px; height: 50px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$carts[0]->product->user->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                                style="width: 50px; height: 50px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$carts[0]->product->user->profile_photo_path ? asset('assets/imgs/products/avatars/' . $carts[0]->product->user->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                             </div>
                                             <h4 class="">{{$carts[0]->product->user->name}}</h4>
                                         </a>
