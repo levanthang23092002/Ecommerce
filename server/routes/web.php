@@ -28,18 +28,7 @@ Route::group(['middleware' => ['userLogin']], function () {
     //admin
     Route::group(['middleware' => 'authAdmin', 'prefix'=> 'admin'], function () {
         Route::get('dashboard', \App\Http\Livewire\Admin\AdminDashBoardComponent::class)->name('admin.dashboard');
-        Route::get('categories', \App\Http\Livewire\Admin\AdminCategoriesComponent::class)->name('admin.categories');
-        Route::get('category/add', \App\Http\Livewire\Admin\AdminAddCategoryComponent::class)->name('admin.category.add');
-        Route::get('category/edit/{category_id}', \App\Http\Livewire\Admin\AdminEditCategoryComponent::class)->name('admin.category.edit');
-        Route::get('category/delete/{category_id}', \App\Http\Livewire\Admin\AdminDeleteCategoryComponent::class)->name('admin.category.delete');
-        Route::get('authors', \App\Http\Livewire\Admin\AdminAuthorsComponent::class)->name('admin.authors');
-        Route::get('author/add', \App\Http\Livewire\Admin\AdminAuthorAddComponent::class)->name('admin.author.add');
-        Route::get('author/edit/{author_id}', \App\Http\Livewire\Admin\AdminAuthorEditComponent::class)->name('admin.author.edit');
-        Route::get('author/delete/{author_id}', \App\Http\Livewire\Admin\AdminAuthorDeleteComponent::class)->name('admin.author.delete');
-        Route::get('publishers', \App\Http\Livewire\Admin\AdminPublishersComponent::class)->name('admin.publishers');
-        Route::get('publisher/add', \App\Http\Livewire\Admin\AdminPublisherAddComponent::class)->name('admin.publisher.add');
-        Route::get('publisher/edit/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherEditComponent::class)->name('admin.publisher.edit');
-        Route::get('publisher/delete/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherDeleteComponent::class)->name('admin.publisher.delete');
+
 
     });
 
@@ -52,6 +41,18 @@ Route::group(['middleware' => ['userLogin']], function () {
         Route::get('product/delete/{product_id}', \App\Http\Livewire\Admin\AdminProductDeleteComponent::class)->name('seller.product.delete');
         Route::get('orders', \App\Http\Livewire\Admin\AdminOrdersComponent::class)->name('seller.orders');
         Route::get('order/edit/{order_id}', \App\Http\Livewire\Admin\AdminOrderEditComponent::class)->name('seller.order.edit');
+        Route::get('categories', \App\Http\Livewire\Admin\AdminCategoriesComponent::class)->name('seller.categories');
+        Route::get('category/add', \App\Http\Livewire\Admin\AdminAddCategoryComponent::class)->name('seller.category.add');
+        Route::get('category/edit/{category_id}', \App\Http\Livewire\Admin\AdminEditCategoryComponent::class)->name('seller.category.edit');
+        Route::get('category/delete/{category_id}', \App\Http\Livewire\Admin\AdminDeleteCategoryComponent::class)->name('seller.category.delete');
+        Route::get('authors', \App\Http\Livewire\Admin\AdminAuthorsComponent::class)->name('seller.authors');
+        Route::get('author/add', \App\Http\Livewire\Admin\AdminAuthorAddComponent::class)->name('seller.author.add');
+        Route::get('author/edit/{author_id}', \App\Http\Livewire\Admin\AdminAuthorEditComponent::class)->name('seller.author.edit');
+        Route::get('author/delete/{author_id}', \App\Http\Livewire\Admin\AdminAuthorDeleteComponent::class)->name('seller.author.delete');
+        Route::get('publishers', \App\Http\Livewire\Admin\AdminPublishersComponent::class)->name('seller.publishers');
+        Route::get('publisher/add', \App\Http\Livewire\Admin\AdminPublisherAddComponent::class)->name('seller.publisher.add');
+        Route::get('publisher/edit/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherEditComponent::class)->name('seller.publisher.edit');
+        Route::get('publisher/delete/{publisher_id}', \App\Http\Livewire\Admin\AdminPublisherDeleteComponent::class)->name('seller.publisher.delete');
     });
 
     //user
