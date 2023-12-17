@@ -69,16 +69,17 @@ class SearchComponent extends Component
 
     public function render()
     {   
-        $query = Product::whereBetween('regular_price', [$this->min_value, $this->max_value]);
-
-        $searchTerms = explode(' ', $this->search_term);
-        
-        foreach ($searchTerms as $term) {
-            $query->where(function ($query) use ($term) {
-                $query->where('name', 'like', "%$term%")
-                      ->orWhere('description', 'like', "%$term%");
-            });
-        }
+        $query = Product::whereBetween('regular_price', [$this->min_value, $this->max_value])
+        ->where(function ($query) {
+            $searchTerms = explode(' ', $this->search_term);
+            
+            foreach ($searchTerms as $term) {
+                $query->orWhere(function ($query) use ($term) {
+                    $query->where('name', 'like', "%$term%")
+                          ->orWhere('description', 'like', "%$term%");
+                });
+            }
+        });
         if ($this->orderBy == "Giá: thấp đến cao") {
             $products = $query->orderBy('regular_price', 'ASC')->paginate($this->pageSize); 
         } elseif ($this->orderBy == "Giá: cao đến thấp") {
