@@ -46,7 +46,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'provider_id',
         'provider',
         'utype',
-        'profile_photo_path'
+        'profile_photo_path',
+        'shop_desc'
     ]; 
  
     /**

@@ -50,7 +50,7 @@
                                         <div class="btn-group dropdown">
                                             <a class="d-flex gap-1 align-items-center" href="#" data-bs-toggle="dropdown">
                                             <div class="rounded-circle img-thumbnail"
-                                                style="width: 30px; height: 30px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{Auth::user()->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                                style="width: 30px; height: 30px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{Auth::user()->profile_photo_path ? asset('assets/imgs/products/avatars/' . Auth::user()->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                             </div>
                                                 {{ Auth::user()->name }}
                                                 @if(Auth::user()->utype === "SELLER")
@@ -65,10 +65,9 @@
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
                                                 @elseif(Auth::user()->utype == 'ADM')
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Quản trị</a></li>
+                                                <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Trang quản trị</a></li>
                                                 @elseif(Auth::user()->utype == 'SELLER')
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
-                                                <li><a class="dropdown-item" href="{{route('seller.dashboard')}}">Bán hàng</a></li>
                                                 </li>
                                                 @endif
                                                 <hr class="dropdown-divider">
@@ -154,16 +153,17 @@
                                             </li>
                                             @if(Auth::check() && Auth::user()->utype === "SELLER")
                                                 <li><a href="{{route('shop', ['seller_id' => Auth::user()->id])}}">Cửa hàng của bạn</a></li>
+                                                <li><a href="{{route('seller.dashboard')}}">Quản lý cửa hàng</a></li>
                                             @else
                                                 <li><a href="{{route('shop', ['seller_id' => 'all'])}}">Mua sắm</a></li>
                                             @endif
                                             <li><a href="{{route('about')}}">Về website</a></li>
                                             @auth
-                                            @if(Auth::user()->utype !== "SELLER" && Auth::user()->utype !== "ADM")
-                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
-                                            @endif
+                                                @if(Auth::user()->utype === "USR")
+                                                <li><a href="{{route('user.upgrade_seller')}}">Trở thành người bán</a></li>
+                                                @endif
                                             @else
-                                            <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
+                                                <li><a href="{{route('seller.register')}}">Trở thành người bán</a></li>
                                             @endif
                                         </ul>
                                     </nav>

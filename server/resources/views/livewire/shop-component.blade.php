@@ -27,7 +27,7 @@
                                 <div class="card-header">
                                     <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-5">
                                         <div class="rounded-circle img-thumbnail"
-                                            style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$seller->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                            style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$seller->profile_photo_path ? asset('assets/imgs/products/avatars/' . $seller->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                         </div>
                                         <div class="d-flex flex-column align-items-start">
                                             <h4>{{$seller->name}}</h4>
@@ -171,7 +171,7 @@
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             @livewireStyles
-                            {{$products->links()}}
+                            {{$products->links('pagination::bootstrap-4')}}
                             @livewireScripts
 
 

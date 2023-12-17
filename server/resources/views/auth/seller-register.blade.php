@@ -89,7 +89,13 @@
                                                 </div>
                                             </div>
 
+                                            <div class="form-group">
+                                                        <label>SĐT <span class="required">*</span></label>
 
+                                                        <input required type="tel" name="phone" pattern="[0-9]{10,11}"
+                                                            placeholder="Số điện thoại *"
+                                                            >
+                                                    </div>
                                             <div class="flex mt-20">
                                                 <x-button class="me-3">{{ __('Đăng ký') }}</x-button>
                                                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

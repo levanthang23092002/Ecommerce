@@ -142,7 +142,7 @@
 
                             <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-50">
                                 <div class="rounded-circle img-thumbnail"
-                                    style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$product->user->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                    style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$product->user->profile_photo_path ? asset('assets/imgs/products/avatars/' . $product->user->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                 </div>
                                 <div class="d-flex flex-column align-items-start">
                                 <h5>{{$product->user->name}}</h5>
@@ -258,7 +258,7 @@
                                                                 <div class="user justify-content-between d-flex w-100">
                                                                     <div class="thumb text-center">
                                                                         <!-- <img src="{{ asset('assets/imgs/user.png')}}" alt=""> -->
-                                                                        <img src="{{$review->user->profile_photo_path ?? asset('assets/imgs/user.png')}}" alt="">
+                                                                        <img src="{{$review->user->profile_photo_path ? asset('assets/imgs/products/avatars/' . $review->user->profile_photo_path) : asset('assets/imgs/user.png')}}" alt="">
                                                                     </div>
                                                                     <div class="desc w-100">
                                                                         <div class="d-flex align-items-center gap-1">
