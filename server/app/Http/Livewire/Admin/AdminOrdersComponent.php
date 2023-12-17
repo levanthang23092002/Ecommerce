@@ -17,9 +17,13 @@ class AdminOrdersComponent extends Component
 
     public function render()
     {
+        $user = Auth::user();
         $orders = $this->filterOrders()
-            ->orderBy('created_at', 'DESC')
-            ->paginate(5);
+        ->whereHas('orderItems.product', function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+                ->orderBy('created_at', 'DESC');
+        })
+        ->paginate(5);
 
         return view('livewire.admin.admin-orders-component', ['orders' => $orders])->layout('layouts.guest');
     }
