@@ -104,12 +104,12 @@ class AdminOrderEditComponent extends Component
                     parse_str($content, $queryArray);
                     if ($queryArray['vnp_ResponseCode'] !== "00") {
                         session()->flash('error', 'Đã xảy ra lỗi khi gửi yêu cầu hoàn tiền.');
-                        return redirect()->route('admin.order.edit', ['order_id' => $this->order_id]);
+                        return redirect()->route('seller.order.edit', ['order_id' => $this->order_id]);
                     }
                 } else {
                     // Xử lý trường hợp không thành công khi gọi API
                     session()->flash('error', 'Đã xảy ra lỗi khi gửi yêu cầu hoàn tiền. Vui lòng thử lại sau');
-                    return redirect()->route('admin.order.edit', ['order_id' => $this->order_id]);
+                    return redirect()->route('seller.order.edit', ['order_id' => $this->order_id]);
                 }
             }
         }
@@ -125,7 +125,7 @@ class AdminOrderEditComponent extends Component
             }
         }
         session()->flash('message', 'Đã cập nhật đơn hàng thành công!');
-        return redirect()->route('admin.order.edit', ['order_id' => $this->order_id]);
+        return redirect()->route('seller.order.edit', ['order_id' => $this->order_id]);
     }
 
     public function render()

@@ -216,7 +216,7 @@
                                     <div class="mb-3 mt-3 col-md-3">
                                         <label for="release_date" class="form-label">Ngày phát hành</label>
                                         <div>
-                                        <input type="date" name="release_date" wire:model="release_date" style="width: 300px; height: 39px">
+                                        <input type="date" name="release_date" wire:model="release_date" style="width: 265px; height: 39px">
                                         </div>
                                         @error('release_date')
                                             <p class="text-danger">{{$message}}</p>
