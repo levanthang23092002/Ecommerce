@@ -32,6 +32,15 @@
                                         <div class="d-flex flex-column align-items-start">
                                             <h4>{{$seller->name}}</h4>
                                         </div>
+                                        <div style="border: 1px solid #ccc; height: 50px"></div>
+                                        <div>Sản phẩm: <span class="text-brand">{{$seller->products->count()}}</span></div>
+                                        <div>Đánh giá: <span class="text-brand">{{number_format($seller->products->average(function($product) {
+                                                return $product->reviews->average(function($review) {
+                                                return $review->rating;
+                                                });
+                                                }),1)}}/5 ({{$seller->products->sum(function($product) {
+                                                return $product->reviews->count();
+                                                })}} Đánh giá)</span></div>
                                     </div>
                                 </div>
                                 @if($seller->shop_desc)

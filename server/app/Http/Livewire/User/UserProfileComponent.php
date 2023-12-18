@@ -39,6 +39,6 @@ class UserProfileComponent extends Component
     }
     public function render()
     {
-        return view('livewire.user.user-upgrade-to-seller-component');
+        return view('livewire.user.user-profile-component');
     }
 }

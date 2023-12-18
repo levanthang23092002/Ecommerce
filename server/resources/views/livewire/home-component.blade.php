@@ -22,7 +22,7 @@
                                     <h2 class="animated fw-900">BLACK FIDAY</h2>
                                     <h1 class="animated fw-900 text-brand">Giảm giá đến 70%</h1>
                                     <p class="animated">Cho tất cả sản phẩm</p>
-                                    <a class="animated btn btn-brush btn-brush-3" href="{{route('home.index')}}"> Mua ngay </a>
+                                    <a class="animated btn btn-brush btn-brush-3" href="{{route('shop', ['seller_id' => 'all'])}}"> Mua ngay </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -42,7 +42,7 @@
                                     <h2 class="animated fw-900">Ngày Giáng Sinh</h2>
                                     <h1 class="animated fw-900 text-7">Truyện trọn bộ</h1>
                                     <p class="animated">Tiết kiệm đén 20%</p>
-                                    <a class="animated btn btn-brush btn-brush-2" href="{{route('home.index')}}"> Mua ngay  </a>
+                                    <a class="animated btn btn-brush btn-brush-2" href="{{route('shop', ['seller_id' => 'all'])}}"> Mua ngay  </a>
                                 </div>
                             </div>
                             <div class="col-lg-7 col-md-6">
@@ -72,7 +72,7 @@
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Mới nhất</button>
                         </li>
                     </ul>
-                    <a href="{{route('home.index')}}" class="view-more d-none d-md-flex">Xem thêm<i class="fi-rs-angle-double-small-right"></i></a>
+                    <a href="{{route('shop', ['seller_id' => 'all'])}}" class="view-more d-none d-md-flex">Xem thêm<i class="fi-rs-angle-double-small-right"></i></a>
                 </div>
 
                 <div class="tab-content wow fadeIn animated" id="myTabContent">

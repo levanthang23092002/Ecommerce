@@ -54,22 +54,6 @@
                                         </div>
 
                                         <div class="card-body">
-                                            <form id="form" wire:submit.prevent="handleSaveAvatar" wire:ignore>
-                                                <div class="form-group col-md-12">
-                                                    <div class="d-inline-flex flex-column gap-1 justify-content-center">
-                                                        <label for="labelAvatar">
-                                                            <div id="avatar" class="rounded-circle img-thumbnail m-2"
-                                                                style="width: 150px; height: 150px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{Auth::user()->profile_photo_path ? asset('assets/imgs/products/avatars/' . Auth::user()->profile_photo_path) : asset('assets/imgs/user.png')}}')">
-                                                            </div>
-                                                        </label>
-                                                        
-                                                        <input id="labelAvatar" onchange="displayImage(this)" wire:model="avatar" type="file"
-                                                            class="form-control d-none" name="profile_photo" accept="image/jpeg, image/png, image/gif">
-                                                            <button type="submit" class="btn btn-fill-out submit"
-                                                            name="submit" value="Submit">Lưu ảnh</button>
-                                                    </div>
-                                                </div>
-                                            </form>
                                             <form method="post" action="{{route('profile.update')}}">
                                                 @csrf
                                                 @method('patch')

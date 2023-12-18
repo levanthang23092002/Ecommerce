@@ -63,11 +63,13 @@
                                             <ul class="dropdown-menu">
                                                 @if(Auth::user()->utype == 'USR')
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                <li><a class="dropdown-item" href="{{route('user.orders')}}">Lịch sử đặt hàng</a></li>
                                                 @elseif(Auth::user()->utype == 'ADM')
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
                                                 <li><a class="dropdown-item" href="{{route('admin.dashboard')}}">Trang quản trị</a></li>
                                                 @elseif(Auth::user()->utype == 'SELLER')
                                                 <li><a class="dropdown-item" href="{{route('profile.edit')}}">Trang cá nhân</a></li>
+                                                <li><a class="dropdown-item" href="{{route('user.orders')}}">Lịch sử đặt hàng</a></li>
                                                 </li>
                                                 @endif
                                                 <hr class="dropdown-divider">
