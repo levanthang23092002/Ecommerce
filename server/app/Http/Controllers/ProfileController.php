@@ -35,6 +35,7 @@ class ProfileController extends Controller
             'ward' => ['required', 'string', 'max:255'],
             'district' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
+            'shop_desc' => ['required'],
         ], [
             'name.required' => 'Vui lòng nhập tên.',
             'name.string' => 'Tên phải là một chuỗi ký tự.',
@@ -56,17 +57,22 @@ class ProfileController extends Controller
             'ward' => 'Phường/Xã',
             'district' => 'Quận/Huyện',
             'city' => 'Thành phố',
+            'shop_desc' => 'Giới thiệu cửa hàng'
         ]));
 
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
         $request->user()->address = $data['address'] . ',' . $data['ward'] . ',' . $data['district'] . ',' . $data['city'];
 
-        $request->user()->save();
+        if(isset($data['utype'])) {
+            $request->user()->utype = 'SELLER';
+            $request->user()->save();
+            return Redirect::route('seller.dashboard');
+        }
 
-        return Redirect::route('user.profile.edit')->with('status', 'profile-updated');
+        $request->user()->save();
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
 
     /**

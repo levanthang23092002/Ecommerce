@@ -75,6 +75,7 @@
                                                 @endphp
 
                                                 <p style="font-size:17px">Đánh giá: {{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20"></p>
+                                                <p style="font-size:17px">Đã bán: {{ $product->quantity_sold }} sản phẩm</p>
                                             </div>
                                         <div>
                                             </div>
@@ -142,12 +143,21 @@
 
                             <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-50">
                                 <div class="rounded-circle img-thumbnail"
-                                    style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$product->user->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                    style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$product->user->profile_photo_path ? asset('assets/imgs/products/avatars/' . $product->user->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                 </div>
                                 <div class="d-flex flex-column align-items-start">
                                 <h5>{{$product->user->name}}</h5>
                                 <a href="{{route('shop', ['seller_id' => $product->user->id])}}" class="rounded p-2 border btn-outline-secondary">Xem shop</a>
                                 </div>
+                                <div style="border: 1px solid #ccc; height: 50px"></div>
+                                        <div>Sản phẩm: <span class="text-brand">{{$seller->products->count()}}</span></div>
+                                        <div>Đánh giá: <span class="text-brand">{{number_format($seller->products->average(function($product) {
+                                                return $product->reviews->average(function($review) {
+                                                return $review->rating;
+                                                });
+                                                }),1)}}/5 ({{$seller->products->sum(function($product) {
+                                                return $product->reviews->count();
+                                                })}} Đánh giá)</span></div>
                             </div>
 
                             <div class="tab-style3 mb-20">
@@ -190,6 +200,7 @@
                                     <div class="tab-pane fade show active" id="Reviews">
                                         <!--comment form-->
                                         @if(Auth::check())
+                                        @if(Auth::user()->utype === 'USR')
                                             @if($errors->any()) 
                                                 <div class="alert alert-danger" role="alert">Vui lòng đánh giá sản phẩm trước khi gửi.</div>
                                             @endif
@@ -242,6 +253,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
                                         @else
                                             <h4 class="">Đăng nhập để được đánh giá.</h4>
                                         @endif
@@ -258,7 +270,7 @@
                                                                 <div class="user justify-content-between d-flex w-100">
                                                                     <div class="thumb text-center">
                                                                         <!-- <img src="{{ asset('assets/imgs/user.png')}}" alt=""> -->
-                                                                        <img src="{{$review->user->profile_photo_path ?? asset('assets/imgs/user.png')}}" alt="">
+                                                                        <img src="{{$review->user->profile_photo_path ? asset('assets/imgs/products/avatars/' . $review->user->profile_photo_path) : asset('assets/imgs/user.png')}}" alt="">
                                                                     </div>
                                                                     <div class="desc w-100">
                                                                         <div class="d-flex align-items-center gap-1">

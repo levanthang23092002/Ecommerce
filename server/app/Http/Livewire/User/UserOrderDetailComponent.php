@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\User;
 
+use App\Models\Order;
 use Livewire\Component;
 
 class UserOrderDetailComponent extends Component
@@ -11,6 +12,7 @@ class UserOrderDetailComponent extends Component
         $this->order = session('order');
         $this->orderItems = session('orderItems');
         $this->products = session('products');
+        $order = Order::where('id' , $this->order->id)->first();
     }
     public function render()
     {

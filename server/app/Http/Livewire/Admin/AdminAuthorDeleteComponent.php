@@ -24,7 +24,7 @@ class AdminAuthorDeleteComponent extends Component
 
     public function cancelDelete()
     {
-        return redirect('/admin/authors');
+        return redirect('/seller/authors');
 
     }
 

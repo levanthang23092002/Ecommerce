@@ -33,6 +33,7 @@ class RegisteredSellerController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:' . User::class, 'ends_with:@gmail.com'],
+            'phone' => ['required', 'numeric', 'digits_between:10,11'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'address' => ['required', 'string', 'max:255'],
             'ward' => ['required', 'string', 'max:255'],
@@ -65,9 +66,11 @@ class RegisteredSellerController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'order_email' => $request->email,
             'password' => Hash::make($request->password),
             'utype' => 'SELLER',
-            'address' => $request['address'] . ',' . $request['ward'] . ',' . $request['district'] . ',' . $request['city']
+            'address' => $request['address'] . ',' . $request['ward'] . ',' . $request['district'] . ',' . $request['city'],
+            'phone' => $request['phone']
         ]);
 
         event(new Registered($user));

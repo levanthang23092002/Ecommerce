@@ -47,7 +47,7 @@
 
                                     <div class="mb-3 mt-3 " wire:ignore>
                                         <label for="category_id " class="form-label">Danh mục</label>
-                                        <select class="form-control " name="category_id" wire:model="category_id" id="categorySelect" >
+                                        <select class="form-control " style="background-color:white" name="category_id" wire:model="category_id" id="categorySelect" >
                                             <option value="">Chọn danh mục</option>
                                             @foreach($categories as $category)
                                                 <option value="{{$category->id}}">{{$category->name}}</option>
@@ -215,7 +215,7 @@
                                     </div>  
                                     <div class="mb-3 mt-3 col-md-3">
                                         <label for="release_date" class="form-label">Ngày phát hành</label>
-                                        <input type="date" name="release_date" wire:model="release_date" style="width: 300px; height: 39px">
+                                        <input type="date" name="release_date" wire:model="release_date" style="width: 265px; height: 39px">
                                         
                                         @error('release_date')
                                             <p class="text-danger">{{$message}}</p>

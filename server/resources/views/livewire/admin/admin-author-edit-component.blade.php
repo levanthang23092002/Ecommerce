@@ -19,7 +19,7 @@
                                         Cập nhật tác giả
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('admin.authors')}}" class="btn btn-success float-end">Tất cả tác giả</a>
+                                        <a href="{{route('seller.authors')}}" class="btn btn-success float-end">Tất cả tác giả</a>
                                         </div>
                                     </div>
                                 </div>

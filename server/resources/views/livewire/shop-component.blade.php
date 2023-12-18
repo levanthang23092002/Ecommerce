@@ -27,11 +27,20 @@
                                 <div class="card-header">
                                     <div class="thumb text-center d-flex flex-row gap-3 align-items-center mb-5">
                                         <div class="rounded-circle img-thumbnail"
-                                            style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$seller->profile_photo_path ?? asset('assets/imgs/user.png')}}')">
+                                            style="width: 75px; height: 75px; overflow: hidden; background-size: cover; background-position: center; background-image: url('{{$seller->profile_photo_path ? asset('assets/imgs/products/avatars/' . $seller->profile_photo_path) : asset('assets/imgs/user.png')}}')">
                                         </div>
                                         <div class="d-flex flex-column align-items-start">
                                             <h4>{{$seller->name}}</h4>
                                         </div>
+                                        <div style="border: 1px solid #ccc; height: 50px"></div>
+                                        <div>Sản phẩm: <span class="text-brand">{{$seller->products->count()}}</span></div>
+                                        <div>Đánh giá: <span class="text-brand">{{number_format($seller->products->average(function($product) {
+                                                return $product->reviews->average(function($review) {
+                                                return $review->rating;
+                                                });
+                                                }),1)}}/5 ({{$seller->products->sum(function($product) {
+                                                return $product->reviews->count();
+                                                })}} Đánh giá)</span></div>
                                     </div>
                                 </div>
                                 @if($seller->shop_desc)
@@ -171,7 +180,7 @@
                         <!--pagination-->
                         <div class="pagination-area mt-15 mb-sm-5 mb-lg-0">
                             @livewireStyles
-                            {{$products->links()}}
+                            {{$products->links('pagination::bootstrap-4')}}
                             @livewireScripts
 
 
@@ -187,7 +196,7 @@
                             </nav> -->
                         </div>
                     </div>
-                    <div class="col-lg-3 primary-sidebar sticky-sidebar">
+                    <div class="col-lg-3 primary-sidebar">
                     <div class=" sidebar-widget price_range range mb-30">
                             <div class="widget-header position-relative mb-20 pb-10">
                                 <h5 class="widget-title mb-10">Lọc Theo Giá</h5>

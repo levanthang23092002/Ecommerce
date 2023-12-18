@@ -7,6 +7,8 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/imgs/theme/favicon.ico') }}">
+
 
     <!-- Favicon -->
 
@@ -55,7 +57,7 @@
                 </a>
                 <div class="d-flex align-items-center ms-4 mb-4">
                     <div class="position-relative">
-                        <img class="rounded-circle" src="{{ asset('assets/imgs/admin.png') }}" alt="" style="width: 40px; height: 40px;">
+                        <img class="rounded-circle" src="{{ Auth::user()->profile_photo_path ? asset('assets/imgs/products/avatars/' .  Auth::user()->profile_photo_path) :  asset('assets/imgs/admin.png/')}}" alt="" style="width: 40px; height: 40px;">
                         <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
                     </div>
                     <div class="ms-3">
@@ -75,15 +77,15 @@
 
                     <a href="{{route('seller.products')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Sản phẩm</a>
                     <a href="{{route('seller.orders')}}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Đơn hàng</a>
-                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Yêu cầu</a>
+                    <a href="{{route('seller.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Nhà phát hành</a>
+                    <a href="{{route('seller.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
+                    <a href="{{route('seller.authors')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Tác giả</a>
                     <a href="{{route('seller.dashboard')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Thống kê</a>
                     @else
                     
                     <a href="/" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Trang chủ</a>
 
-                    <a href="{{route('admin.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Nhà phát hành</a>
-                    <a href="{{route('admin.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
-                    <a href="{{route('admin.authors')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Tác giả</a>
+
                     <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Duyệt yêu cầu</a>
                     <a href="{{route('admin.dashboard')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
                     @endif

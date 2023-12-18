@@ -24,7 +24,7 @@ class AdminPublisherDeleteComponent extends Component
 
     public function cancelDelete()
     {
-        return redirect('/admin/publishers');
+        return redirect('/seller/publishers');
 
     }
 

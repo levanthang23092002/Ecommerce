@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,9 @@ class FacebookAuthController extends Controller
                 return redirect()->intended('');
          
             }else{
+                $imageContents = file_get_contents($facebookUser->getAvatar());
+                $imageName = Carbon::now()->timestamp . '.jpg';
+                Storage::disk('avatars')->put($imageName, $imageContents);
                 $newUser = User::updateOrCreate(['email' => $facebookUser->getEmail()],[
                         'name' => $facebookUser->getName(),
                         'email' => $facebookUser->getEmail(),
@@ -38,7 +43,7 @@ class FacebookAuthController extends Controller
                         'provider_id'=> $facebookUser->getId(),
                         'provider' => 'facebook',
                         'password' => bcrypt(Str::random(8)),
-                        'profile_photo_path' => $facebookUser->getAvatar()
+                        'profile_photo_path' => $imageName
                     ]);
 
                 Auth::login($newUser);
