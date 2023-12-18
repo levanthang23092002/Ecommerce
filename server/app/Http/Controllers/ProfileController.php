@@ -65,7 +65,7 @@ class ProfileController extends Controller
         }
         $request->user()->address = $data['address'] . ',' . $data['ward'] . ',' . $data['district'] . ',' . $data['city'];
 
-        if($data['utype']) {
+        if(isset($data['utype'])) {
             $request->user()->utype = 'SELLER';
             $request->user()->save();
             return Redirect::route('seller.dashboard');

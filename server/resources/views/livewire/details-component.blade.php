@@ -200,6 +200,7 @@
                                     <div class="tab-pane fade show active" id="Reviews">
                                         <!--comment form-->
                                         @if(Auth::check())
+                                        @if(Auth::user()->utype === 'USR')
                                             @if($errors->any()) 
                                                 <div class="alert alert-danger" role="alert">Vui lòng đánh giá sản phẩm trước khi gửi.</div>
                                             @endif
@@ -252,6 +253,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @endif
                                         @else
                                             <h4 class="">Đăng nhập để được đánh giá.</h4>
                                         @endif
