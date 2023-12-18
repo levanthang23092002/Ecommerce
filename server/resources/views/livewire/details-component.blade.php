@@ -75,6 +75,7 @@
                                                 @endphp
 
                                                 <p style="font-size:17px">Đánh giá: {{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20"></p>
+                                                <p style="font-size:17px">Đã bán: {{ $product->quantity_sold }} sản phẩm</p>
                                             </div>
                                         <div>
                                             </div>
@@ -148,6 +149,15 @@
                                 <h5>{{$product->user->name}}</h5>
                                 <a href="{{route('shop', ['seller_id' => $product->user->id])}}" class="rounded p-2 border btn-outline-secondary">Xem shop</a>
                                 </div>
+                                <div style="border: 1px solid #ccc; height: 50px"></div>
+                                        <div>Sản phẩm: <span class="text-brand">{{$seller->products->count()}}</span></div>
+                                        <div>Đánh giá: <span class="text-brand">{{number_format($seller->products->average(function($product) {
+                                                return $product->reviews->average(function($review) {
+                                                return $review->rating;
+                                                });
+                                                }),1)}}/5 ({{$seller->products->sum(function($product) {
+                                                return $product->reviews->count();
+                                                })}} Đánh giá)</span></div>
                             </div>
 
                             <div class="tab-style3 mb-20">
