@@ -77,16 +77,13 @@
 
                     <a href="{{route('seller.products')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Sản phẩm</a>
                     <a href="{{route('seller.orders')}}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Đơn hàng</a>
-                    <a href="{{route('seller.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Nhà phát hành</a>
-                    <a href="{{route('seller.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
-                    <a href="{{route('seller.authors')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Tác giả</a>
+
                     <a href="{{route('seller.dashboard')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Thống kê</a>
                     @else
                     
                     <a href="/" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Trang chủ</a>
-
-
-                    <a href="/" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Duyệt yêu cầu</a>
+                    <a href="{{route('admin.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Nhà phát hành</a>
+                    <a href="{{route('admin.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
                     <a href="{{route('admin.dashboard')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
                     @endif
                 @endif

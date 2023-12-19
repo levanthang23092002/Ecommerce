@@ -14,7 +14,7 @@
                                         Thêm nhà phát hành
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('seller.publishers')}}" class="btn btn-success float-end">Tất cả nhà phát hành</a>
+                                        <a href="{{route('admin.publishers')}}" class="btn btn-success float-end">Tất cả nhà phát hành</a>
                                         </div>
                                     </div>
                                 </div>
