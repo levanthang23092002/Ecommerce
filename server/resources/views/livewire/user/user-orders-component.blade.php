@@ -73,7 +73,7 @@
 
                                                             <td>{{ number_format($order->amount, 0, ',', ',') }} VND
                                                             </td>
-                                                            <td>{{$order->created_at->timezone('Asia/Ho_Chi_Minh')}}</td>
+                                                            <td>{{$order->created_at->timezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s')}}</td>
                                                             <td>
                                                                 <a href="{{route('user.order_detail', ['order_id' => $order->id])}}"
                                                                     class="btn-small d-block">Xem chi tiết</a>
