@@ -110,7 +110,28 @@
                                     <nav>
                                         <ul>
                                             <li><a class="active" href="/">Trang chủ </a></li>
-                                            
+                                            <li class="position-static"><a href="#">Danh mục <i
+                                                        class="fi-rs-angle-down"></i></a>
+                                                <ul class="mega-menu">
+                                                <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <ul>
+                                                @foreach($categories as $key => $category)
+                                                @if(($key + 1) % 3 == 0)
+                                                <li><a href="{{ route('product.category', ['slug' => $category->slug]) }}">{{$category->name}}</a>
+                                                            </li>
+                                                            </ul>
+                                                            <li class="sub-mega-menu sub-mega-menu-width-22">
+                                                        <ul>
+                                                            @else
+                                                
+                                                            <li><a href="{{ route('product.category', ['slug' => $category->slug]) }}">{{$category->name}}</a>
+                                                            </li>
+
+                                                @endif
+                                                @endforeach
+                                                </ul>
+                                                </ul>
+                                            </li>
                                             @if(Auth::check() && Auth::user()->utype === "SELLER")
                                                 <li><a href="{{route('shop', ['seller_id' => Auth::user()->id])}}">Cửa hàng của bạn</a></li>
                                                 <li><a href="{{route('seller.dashboard')}}">Quản lý cửa hàng</a></li>

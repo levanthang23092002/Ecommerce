@@ -18,7 +18,12 @@ class product extends Model
     }
     public function category()
     {
-        return $this->belongsTo(Category::class, 'category_id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    public function publisher()
+    {
+        return $this->hasOne(Publisher::class, 'id', 'publisher_id');
     }
 
     public function user()
