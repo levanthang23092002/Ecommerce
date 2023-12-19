@@ -21,19 +21,11 @@ class AdminProductEditComponent extends Component
     public $description;
     public $regular_price;
     public $sale_price;
-    public $ISBN;
-    public $cover_type;
-    public $size;
-    public $release_date;
-    public $weight;
-    public $language;
-    public $demographic;
     public $stock_status;
     public $quantity;
     public $image;
     public $pages;
     public $category_id;
-    public $author_id;
     public $publisher_id;
     public $newimage;
 
@@ -44,19 +36,10 @@ class AdminProductEditComponent extends Component
         $this->description = $product->description;
         $this->regular_price = $product->regular_price;
         $this->sale_price = $product->sale_price;
-        $this->ISBN = $product->ISBN;
-        $this->cover_type = $product->cover_type;
-        $this->size = $product->size;
-        $this->release_date = $product->release_date;
-        $this->weight = $product->weight;
         $this->image = $product->image;
-        $this->language = $product->language;
-        $this->demographic = $product->demographic;
         $this->stock_status = $product->stock_status;
-        $this->pages = $product->pages;
         $this->quantity = $product->quantity;
         $this->category_id = $product->category_id;
-        $this->author_id = $product->author_id;
         $this->publisher_id = $product->publisher_id;
     }
     public function increasePage()
@@ -116,18 +99,9 @@ class AdminProductEditComponent extends Component
             'description' => 'required',
             'regular_price' => 'required',
             'sale_price' => 'required',
-            'ISBN' => 'required',
-            'cover_type' => 'required',
-            'size' => 'required',
-            'release_date' => 'required|date',
-            'weight' => 'required',
-            'language' => 'required',
-            'demographic' => 'required',
             'stock_status' => 'required',
-            'pages' => 'required',
             'quantity' => 'required',
             'category_id' => 'required',
-            'author_id' => 'required',
             'publisher_id' => 'required'
             ]);
             $product = Product::find($this->product_id);
@@ -136,15 +110,8 @@ class AdminProductEditComponent extends Component
             $product->description = $this->description;
             $product->regular_price = $this->regular_price;
             $product->sale_price = $this->sale_price;
-            $product->ISBN = $this->ISBN;
-            $product->cover_type = $this->cover_type;
-            $product->size = $this->size;
-            $product->release_date = $this->release_date;
-            $product->weight = $this->weight;
-            $product->language = $this->language;
-            $product->demographic = $this->demographic;
+            
             $product->stock_status = $this->stock_status;
-            $product->pages = $this->pages;
             $product->quantity = $this->quantity;
             if($this->newimage){
                 unlink('assets/imgs/products/products/'.$product->image);
@@ -153,7 +120,6 @@ class AdminProductEditComponent extends Component
                 $product->image = $imageName;
             }
             $product->category_id = $this->category_id;
-            $product->author_id = $this->author_id;
             $product->publisher_id = $this->publisher_id; 
             $product->save();
     
