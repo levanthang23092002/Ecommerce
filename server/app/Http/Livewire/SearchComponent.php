@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+
 class SearchComponent extends Component
 {   
     use WithPagination;
@@ -70,37 +71,33 @@ class SearchComponent extends Component
     public function render()
     {
         $query = Product::whereBetween('regular_price', [$this->min_value, $this->max_value]);
-    
+
         if ($this->search_term) {
             $searchTerms = explode(' ', $this->search_term);
-    
+
             $query->where(function ($query) use ($searchTerms) {
                 foreach ($searchTerms as $term) {
                     $query->orWhere('name', 'like', "%$term%");
                 }
             });
         }
-    
+
+        $query->selectRaw('*, (CASE WHEN name LIKE ? THEN 2 ELSE 1 END) as score', ["%{$this->q}%"])
+            ->orderBy('score', 'DESC');
+
         if ($this->orderBy == "Giá: thấp đến cao") {
-            $products = $query->orderBy('regular_price', 'ASC')
-                             ->orderByRaw("CASE WHEN name = '{$this->q}' THEN 1 ELSE 2 END")
-                             ->paginate($this->pageSize);
+            $query->orderBy('regular_price', 'ASC');
         } elseif ($this->orderBy == "Giá: cao đến thấp") {
-            $products = $query->orderBy('regular_price', 'DESC')
-                             ->orderByRaw("CASE WHEN name = '{$this->q}' THEN 1 ELSE 2 END")
-                             ->paginate($this->pageSize);
+            $query->orderBy('regular_price', 'DESC');
         } elseif ($this->orderBy == 'Sản phẩm mới') {
-            $products = $query->orderBy('created_at', 'DESC')
-                             ->orderByRaw("CASE WHEN name = '{$this->q}' THEN 1 ELSE 2 END")
-                             ->paginate($this->pageSize);
-        } else {
-            $products = $query->orderByRaw("CASE WHEN name = '{$this->q}' THEN 1 ELSE 2 END")
-                             ->paginate($this->pageSize);
+            $query->orderBy('created_at', 'DESC');
         }
-    
+
+        $products = $query->paginate($this->pageSize);
+
         $categories = Category::orderBy('name', 'ASC')->get();
-    
+
         return view('livewire.search-component', ['products' => $products, 'categories' => $categories]);
     }
-    
+
 }
