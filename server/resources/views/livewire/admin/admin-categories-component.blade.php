@@ -23,7 +23,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end">
-                                        <a href="{{ route('seller.category.add') }}" class="btn btn-success float-end" >Thêm danh mục</a>
+                                        <a href="{{ route('admin.category.add') }}" class="btn btn-success float-end" >Thêm danh mục</a>
                                     </div>
                                 </div>
                             </div>
@@ -44,8 +44,8 @@
                                                 <td>{{$category->name}}</td>
                                                 <td>{{$category->slug}}</td>
                                                 <td>
-                                                    <a href="{{route('seller.category.edit', ['category_id'=>$category->id])}}" class="text-info">Chỉnh sửa</a>
-                                                    <a href="{{route('seller.category.delete', ['category_id'=>$category->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>
+                                                    <a href="{{route('admin.category.edit', ['category_id'=>$category->id])}}" class="text-info">Chỉnh sửa</a>
+                                                    <a href="{{route('admin.category.delete', ['category_id'=>$category->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>
                                                 </td>
                                             </tr>
                                         @endforeach

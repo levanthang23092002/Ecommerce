@@ -15,7 +15,7 @@
                                         Thêm danh mục
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('seller.categories')}}" class="btn btn-success float-end">Tất cả danh mục</a>
+                                        <a href="{{route('admin.categories')}}" class="btn btn-success float-end">Tất cả danh mục</a>
                                         </div>
                                     </div>
                                 </div>
