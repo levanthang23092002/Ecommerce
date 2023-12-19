@@ -1,7 +1,7 @@
 <div>
     <main class="main">
     <div class="container" style="background-color: #f0f0f0; text-align: center; padding: 20px; margin-bottom: 20px">
-    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: black;">Cập nhật sản phẩm</h2>
+    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: black;">Thêm sản phẩm</h2>
 </div>
             <section class="mt-50 mb-50">
                 <div class="container">
@@ -24,8 +24,8 @@
                                     @endif
                                 <form wire:submit.prevent="addProduct">
                                 <div class="mb-3 mt-3">
-                                        <label for="name" class="form-label">Tên sách</label>
-                                        <input type="text" name="name" class="form-control" style="background-color:white" placeholder="Nhập tên sách" wire:model="name" wire:keyup="generateSlug"/>
+                                        <label for="name" class="form-label">Tên sản phẩm</label>
+                                        <input type="text" name="name" class="form-control" style="background-color:white" placeholder="Nhập tên sản phẩm" wire:model="name" wire:keyup="generateSlug"/>
                                         @error('name')
                                             <p class="text-danger">{{$message}}</p>
                                         @enderror
@@ -38,7 +38,7 @@
                                         @enderror                                        
                                     </div>
                                     <div class="mb-3 mt-3">
-                                        <label for="description" class="form-label">Tóm tắt</label>
+                                        <label for="description" class="form-label">Mô tả sản phẩm</label>
                                         <textarea class="form-control" style="background-color:white; height: 150px;" name="description" placeholder="Nhập tóm tắt" wire:model="description"></textarea>
                                         @error('description')
                                         <p class="text-danger">{{$message}}</p>
@@ -56,7 +56,6 @@
                                         @error('category_id')
                                             <p class="text-danger">{{$message}}</p>
                                         @enderror
-
                                         <label for="publisher_id" class="form-label" >Nhà phát hành</label>
                                         <select class="form-control" style="background-color:white" name="publisher_id" wire:model="publisher_id" id="publisherSelect">
                                         <option value="">Chọn nhà phát hành</option>>
@@ -67,18 +66,8 @@
                                         @error('publisher_id')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
-
-                                        <label for="author_id" class="form-label" >Tác giả</label>
-                                        <select class="form-control" style="background-color:white" name="author_id" wire:model="author_id" id="authorSelect">
-                                        <option value="">Chọn tác giả</option>>
-                                        @foreach($authors as $author)
-                                        <option value="{{$author->id}}">{{$author->name}}</option>
-                                        @endforeach
-                                        </select>
-                                        @error('author_id')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>   
+                                    </div>
+                                       
                                     <div class="row">   
                                     <div class="mb-3 mt-3  col-md-3">
                                         <label for="regular_price" class="form-label">Giá bán</label>
@@ -110,38 +99,8 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>    
-                                    <div class="mb-3 mt-3  col-md-3">
-                                        <label for="weight" class="form-label">Trọng lượng (gram)</label>
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button" wire:click="decreaseWeight">-</button>
-                                            </span>
-                                            <input type="text" name="weight" class="form-control" style="background-color:white" placeholder="Nhập trọng lượng" wire:model="weight"/>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button" wire:click="increaseWeight">+</button>
-                                            </span>
-                                        </div>
-                                        @error('weight')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>  
-                                    <div class="mb-3 mt-3  col-md-3">
-                                        <label for="pages" class="form-label">Số trang</label>
-                                        <div class="input-group">
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button" wire:click="decreasePage">-</button>
-                                            </span>
-                                            <input type="text" name="pages" class="form-control" style="background-color:white" placeholder="Nhập số trang" wire:model="pages"/>
-                                            <span class="input-group-btn">
-                                                <button class="btn btn-secondary" type="button" wire:click="increasePage">+</button>
-                                            </span>
-                                        </div>
-                                        @error('pages')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
-                                    </div>
-                                    <div class="row">   
+
+  
                                     <div class="mb-3 mt-3  col-md-3">
                                         <label for="quantity" class="form-label">Số lượng sản phẩm</label>
                                         <div class="input-group">
@@ -157,70 +116,8 @@
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
-                                    <div class="mb-3 mt-3  col-md-3">
-                                        <label for="ISBN" class="form-label">ISBN</label>
-                                        <input type="text" name="ISBN" class="form-control" style="background-color:white" placeholder="Nhập ISBN" wire:model="ISBN"/>
-                                        @error('ISBN')
-                                            <p class="text-danger">{{$message}}</p>
-                                        @enderror                                        
-                                    </div>
-                                    <div class="mb-3 mt-3 col-md-3">
-                                        <label for="cover_type" class="form-label" wire:model="cover_type">Loại Bìa</label>
-                                            <select class="form-control" style="background-color:white" name="cover_type" wire:model="cover_type">
-                                                <option value="Bìa mềm">Bìa mềm</option>
-                                                <option value="Bìa cứng">Bìa cứng</option>
-                                                <option value="Bìa rời">Bìa rời</option>
-                                                <option value="Bìa gập">Bìa gập</option>
-                                            </select>
-                                        @error('cover_type')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
-                                    <div class="mb-3 mt-3 col-md-3">
-                                        <label for="size" class="form-label" >Kích thước (00x00cm)</label>
-                                        <input type="text" name="size" class="form-control" style="background-color:white" placeholder="Nhập kích thước 00x00cm" wire:model="size" />
-                                        @error('size')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
 
 
-
-                                    </div>  
-                                    <div class="row">   
-                                    <div class="mb-3 mt-3 col-md-3">
-                                        <label for="language" class="form-label" wire:model="language">Ngôn ngữ</label>
-                                            <select class="form-control" style="background-color:white" name="language" wire:model="language">
-                                                <option value="Tiếng Việt">Tiếng Việt</option>
-                                                <option value="Tiếng Nhật">Tiếng Nhật</option>
-                                                <option value="Tiếng Trung">Tiếng Trung</option>
-                                                <option value="Tiếng Hàn">Tiếng Hàn</option>
-                                                <option value="Tiếng Anh">Tiếng Anh</option>
-                                            </select>
-                                        @error('language')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div> 
-                                    <div class="mb-3 mt-3  col-md-3">
-                                        <label for="demographic" class="form-label" >Đối tượng</label>
-                                            <select class="form-control" style="background-color:white" name="demographic" wire:model="demographic">
-                                                <option value="3+">3+</option>
-                                                <option value="13+">13+</option>
-                                                <option value="17+">17+</option>
-                                                <option value="18+">18+</option>
-                                            </select>
-                                        @error('demographic')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>  
-                                    <div class="mb-3 mt-3 col-md-3">
-                                        <label for="release_date" class="form-label">Ngày phát hành</label>
-                                        <input type="date" name="release_date" wire:model="release_date" style="width: 265px; height: 39px">
-                                        
-                                        @error('release_date')
-                                            <p class="text-danger">{{$message}}</p>
-                                        @enderror
-                                    </div>
 
                                                                                                                                           
                                     <div class="mb-3 mt-3 col-md-3">
@@ -234,7 +131,6 @@
                                         @enderror
                                     </div>
 
-                                    </div>
                                     <div class="mb-3 mt-3">
                                         <label for="image" class="form-label">Ảnh</label>
                                         <input type="file" name="image" class="form-control" style="background-color:white" wire:model="image"/>
@@ -244,6 +140,7 @@
                                         @error('image')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
+                                    </div>
                                     </div>
                                                                                                                                        
                                         <button type="submit" class="btn btn-primary float-end">Thêm</button>
