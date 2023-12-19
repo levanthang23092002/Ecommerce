@@ -56,17 +56,49 @@
             </div>
             <div class="slider-arrow hero-slider-1-arrow"></div>
         </section>
-        
+        <section class="section-padding" wire:ignore>
+            <div class="container wow fadeIn animated">
+                <h3 class="section-title mb-20">Sản phẩm <span> đề xuất</span></h3>
+                <div class="carausel-6-columns-cover position-relative">
+                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
+                    <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
+                        
+     
+                        @foreach($recommended_products as $product)
+                        <div class="product-cart-wrap small hover-up">
+                            <div class="product-img-action-wrap">
+                                <div class="product-img">
+                                    <a href="{{route('product.details',['slug'=>$product->slug])}}">
+                                        <img class="default-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                        <img class="hover-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="new">Đề xuất</span>
+                                </div>
+                            </div>
+                            <div class="product-content-wrap">
+                                <h2><a href="{{route('product.details',['slug'=>$product->slug])}}">{{substr($product->name,0,60)}}</a></h2>
+                                <div class="product-price">
+                                    <span>{{number_format($product->regular_price)}} VND</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="product-tabs section-padding position-relative wow fadeIn animated">
             <div class="bg-square"></div>
             <div class="container">
                 <div class="tab-header">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="nav-tab-one" data-bs-toggle="tab" data-bs-target="#tab-one" type="button" role="tab" aria-controls="tab-one" aria-selected="true">Nổi bật</button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Bán chạy</button>
+                            <button class="nav-link active" id="nav-tab-two" data-bs-toggle="tab" data-bs-target="#tab-two" type="button" role="tab" aria-controls="tab-two" aria-selected="false">Bán chạy</button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="nav-tab-three" data-bs-toggle="tab" data-bs-target="#tab-three" type="button" role="tab" aria-controls="tab-three" aria-selected="false">Mới nhất</button>
@@ -76,9 +108,9 @@
                 </div>
 
                 <div class="tab-content wow fadeIn animated" id="myTabContent">
-                    <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
+                    <div class="tab-pane fade  show active" id="tab-two" role="tabpanel" aria-labelledby="tab-one">
                         <div class="row product-grid-4">
-                        @foreach($products as $product )
+                        @foreach($best_sell_products as $product )
                             <div class="col-lg-3 col-md-4 col-6 col-sm-6">
                                 <div class="product-cart-wrap mb-30">
                                     <div class="product-img-action-wrap" >
@@ -89,7 +121,68 @@
                                             </a>
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Nổi bật</span>
+                                            <span class="hot">Bán chạy</span>
+                                        </div>
+                                    </div>
+                                    <div class="product-content-wrap">
+                                        <div class="product-category">
+                                           
+                                        </div>
+                                        <h2><a
+                                                href="{{route('product.details',['slug'=>$product->slug])}}">{{$product->name}}</a>
+                                        </h2>
+                                       
+
+                                        <div class="row">
+                                        <div class="mb-3 mt-3"> 
+                                        <div class="product-price">
+                                            <span>{{number_format($product->regular_price)}} VND </span>
+                                            <span class="old-price font-md ml-1">{{number_format($product->sale_price)}}</span>
+                                            <!-- <span class="old-price">$245.8</span> -->
+                                        </div>
+                                        <div class="product-action-1 show">
+
+                                            @livewireStyles
+                                            @if(Auth::check())
+                                                @if(Auth::user()->wishes && Auth::user()->wishes->pluck('product_id')->contains($product->id))
+                                                    <a aria-label="Bỏ yêu thích" class="action-btn hover-up" style="background-color: #07b55b; color: #fff;" href="#" wire:click.prevent="removeFromWishlist({{$product->id}})"><i class="fi-rs-heart"></i></a>
+                                                @else
+                                                    <a aria-label="Yêu thích" class="action-btn hover-up" href="#" wire:click.prevent="addToWishlist({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i class="fi-rs-heart"></i></a>
+                                                @endif
+                                            @else
+                                                <a aria-label="Yêu thích" class="action-btn hover-up" href="{{route('login')}}"><i class="fi-rs-heart"></i></a>
+                                            @endif
+                                            <a aria-label="Thêm vào giỏ hàng" class="action-btn hover-up"
+                                                wire:click.prevent="store({{$product->id}},'{{$product->name}}',{{$product->regular_price}})"><i
+                                                    class="fi-rs-shopping-bag-add"></i></a>
+                                            @livewireScripts
+
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        @endforeach   
+                        </div>
+                     
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-three" role="tabpanel" aria-labelledby="tab-one">
+                        <div class="row product-grid-4">
+                        @foreach($new_products as $product)
+                            <div class="col-lg-3 col-md-4 col-6 col-sm-6">
+                                <div class="product-cart-wrap mb-30">
+                                    <div class="product-img-action-wrap" >
+                                        <div class="product-img product-img-zoom">
+                                            <a href="{{route('product.details',['slug'=>$product->slug])}}" >
+                                                <img class="default-img" style="height: 400px" src="{{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                                <img class="hover-img"  style="height: 400px" src="{{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="product-badges product-badges-position product-badges-mrg">
+                                            <span class="hot">Mới</span>
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
@@ -182,44 +275,8 @@
                     </div>
                 </div>
             </div>
-        </section>        
-        <section class="section-padding" wire:ignore>
-            <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20">Sản phẩm <span> MỚI</span></h3>
-                <div class="carausel-6-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
-                    <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                        
-     
-                        @foreach($products as $product )
-                        <div class="product-cart-wrap small hover-up">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img product-img-zoom">
-                                    <a href="{{route('product.details',['slug'=>$product->slug])}}">
-                                        <img class="default-img" style="height: 300px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
-                                        <img class="hover-img" style="height: 300px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-badges product-badges-position product-badges-mrg">
-                                    <span class="new">New</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <h2><a href="{{route('product.details',['slug'=>$product->slug])}}">{{substr($product->name,0,60)}}</a></h2>
-                                <div class="product-price">
-                                    <span>{{number_format($product->regular_price)}} VND</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
-       
+        </section>              
+      
         <section class="section-padding" wire:ignore>
             <div class="container">
                 <h3 class="section-title mb-20 wow fadeIn animated"><span>Các hãng </span>đối tác</h3>
