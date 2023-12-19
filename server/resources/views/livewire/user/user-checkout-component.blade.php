@@ -16,21 +16,8 @@
         </div>
         <section class="mt-50 mb-50">
             <div class="container">
+                
                 <div class="row">
-                    @if ($errors->any())
-                        <div class=" alert alert-danger mt-3 mb-3">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
-                    @if(isset($errorMessage) && !empty($errorMessage))
-                    <div class="alert alert-danger mt-3 mb-3">
-                        {{ $errorMessage }}
-                    </div>
-                    @endif
                     <div class="payment_method col-lg-4" wire:ignore>
                         <div class="order_review">
                             <div class="mb-25">

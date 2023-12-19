@@ -95,6 +95,7 @@ class UserCheckoutComponent extends Component
 
     public function render()
     {
+        $errorMessage = '';
         if($this->city && $this->district) {
             foreach (Auth::user()->carts->groupBy('seller_id') as $sellerId => $carts) {
                 $seller = User::where('id', $sellerId)->first();
@@ -105,9 +106,9 @@ class UserCheckoutComponent extends Component
                 });
                 $this->shipFees[$sellerId] = $this->calculatorShipFee($sellerCity, $sellerDistrict, $this->city, $this->district, $weight);
                 if($this->shipFees[$sellerId] === -1) {
-                    return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Địa chỉ này không được hỗ trợ giao hàng']); 
+                    $errorMessage = 'Địa chỉ này không được hỗ trợ giao hàng';
                 } elseif ($this->shipFees[$sellerId] === -2) {
-                    return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Xảy ra lỗi trong quá trình tính phí giao hàng']); 
+                    $errorMessage = 'Xảy ra lỗi trong quá trình tính phí giao hàng, vui lòng thử lại sau';
                 }
             }
         }
