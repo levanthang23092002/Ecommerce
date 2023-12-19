@@ -275,9 +275,8 @@
                     </div>
                 </div>
             </div>
-        </section>        
-        
-       
+        </section>              
+      
         <section class="section-padding" wire:ignore>
             <div class="container">
                 <h3 class="section-title mb-20 wow fadeIn animated"><span>Các hãng </span>đối tác</h3>

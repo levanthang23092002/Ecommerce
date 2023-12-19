@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <div style="height: 50px;">
-                                                <select wire:model="filterorderStatus" class="form-control"  style="width: 210px;border: 1px solid #ccc; border-radius: 4px;" >
+                                                <select wire:model="filterorderStatus" class="form-control"  style="width: 210px;border: 1px solid #ccc; border-radius: 4px; margin-left: 20px;" >
                                                     <option value="">Trạng thái đơn hàng ▼</option>
                                                     <option value="0">Chờ duyệt</option>
                                                     <option value="1">Đã duyệt</option>
@@ -96,7 +96,7 @@
                                                     </td>
                                                     
                                                     <td>{{ number_format($order->amount, 0, ',', ',') }} VND</td>
-                                                    <td>{{$order->created_at->timezone('Asia/Ho_Chi_Minh')}}</td>
+                                                    <td>{{$order->created_at->timezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s')}}</td>
                                                     <td>
                                                     <a href="{{route('seller.order.edit', ['order_id'=>$order->id])}}" class="text-info">Cập nhật</a>
                                                     </td>

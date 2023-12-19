@@ -74,7 +74,7 @@
                                                     $averageRating = $totalRatings > 0 ? $sumRatings / $totalRatings : 0;
                                                 @endphp
 
-                                                <p style="font-size:17px">Đánh giá: {{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20"></p>
+                                                <p style="font-size:17px">Đánh giá: {{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20" style="vertical-align: middle; margin-bottom: 5px;"></p>
                                                 <p style="font-size:17px">Đã bán: {{ $product->quantity_sold }} sản phẩm</p>
                                             </div>
                                         <div>
@@ -435,7 +435,7 @@
                                     <img src="{{asset('assets/imgs/products/products')}}/{{$nproduct->image}}" alt="{{$nproduct->name}}">
                                 </div>
                                 <div class="content pt-10">
-                                    <h5><a href="{{route('product.details',['slug'=>$nproduct->slug])}}">{{substr($nproduct->name,0,50)}}...</a></h5>
+                                    <h5><a href="{{route('product.details',['slug'=>$nproduct->slug])}}">{{substr($nproduct->name,0,60)}}...</a></h5>
                                     <p class="price mb-0 mt-5">{{number_format($product->regular_price)}} VND</p>
                                     
                                 </div>
