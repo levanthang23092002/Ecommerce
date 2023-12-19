@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="col-md-1">
                                             <div style="height: 50px;">
-                                                <select wire:model="filterorderStatus" class="form-control"  style="width: 210px;border: 1px solid #ccc; border-radius: 4px;" >
+                                                <select wire:model="filterorderStatus" class="form-control"  style="width: 210px;border: 1px solid #ccc; border-radius: 4px; margin-left: 20px;" >
                                                     <option value="">Trạng thái đơn hàng ▼</option>
                                                     <option value="0">Chờ duyệt</option>
                                                     <option value="1">Đã duyệt</option>
