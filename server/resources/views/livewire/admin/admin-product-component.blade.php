@@ -52,7 +52,7 @@
                                                     <td>{{$product->stock_status}}</td>
                                                     <td>{{ number_format($product->regular_price, 0, ',', ',') }} VND</td>
                                                     <td>{{$product->category->name}}</td>
-                                                    <td>{{$product->created_at->timezone('Asia/Ho_Chi_Minh')}}</td>
+                                                    <td>{{$product->created_at->timezone('Asia/Ho_Chi_Minh')->format('d/m/Y H:i:s')}}</td>
                                                     <td>
                                                         <a href="{{route('seller.product.edit', ['product_id'=>$product->id])}}" class="text-info">Chỉnh sửa</a>
                                                         <a href="{{route('seller.product.delete', ['product_id'=>$product->id])}}" class="text-danger" style="margin-left:20px;">Xoá</a>   

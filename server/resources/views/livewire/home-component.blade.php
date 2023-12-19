@@ -196,8 +196,8 @@
                             <div class="product-img-action-wrap">
                                 <div class="product-img product-img-zoom">
                                     <a href="{{route('product.details',['slug'=>$product->slug])}}">
-                                        <img class="default-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
-                                        <img class="hover-img" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                        <img class="default-img" style="height: 300px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                        <img class="hover-img" style="height: 300px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
                                     </a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
