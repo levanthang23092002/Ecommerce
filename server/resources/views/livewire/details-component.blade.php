@@ -53,8 +53,6 @@
                                         <div class="product-detail-rating">
                                             <div class="pro-details-brand">
                                                
-                                               <p style="font-size:17px">Nhà xuất bản: <a href="#" >{{$publisher->name}}</a></p>
-                                               <p style="font-size:17px">Tác giả: <a href="#" >{{$author->name}}</a></p>
                                                @php
                                                     $totalRatings = count($product->reviews);
                                                     $countRatings = [0, 0, 0, 0, 0];
@@ -158,35 +156,6 @@
                                                 }),1)}}/5 ({{$seller->products->sum(function($product) {
                                                 return $product->reviews->count();
                                                 })}} Đánh giá)</span></div>
-                            </div>
-
-                            <div class="tab-style3 mb-20">
-                                <ul class="nav nav-tabs text-uppercase mb-3">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="Description-tab" data-bs-toggle="tab" href="#Description">Chi tiết sản phẩm</a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content shop_info_tab entry-main-content mt-0">
-                                    <div class="tab-pane fade show active" id="Description">
-                                        <div  class="row bg-success p-3 rounded-3">
-                                            <div class="col-md-4 col-sm-12">
-                                                <div style=" padding: 5px; "><strong>Định dạng : </strong><span> {{$product->cover_type}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Kích Thước : </strong><span> {{$product->size}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Trọng Lượng : </strong><span> {{$product->weight}}g</span></div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-12">
-                                                <div style=" padding: 5px; "><strong>Số Trang : </strong><span> {{$product->pages}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Trạng thái : </strong><span> {{$product->stock_status}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Ngày Phát Hành : </strong><span> {{$product->release_date}}</span></div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-12">
-                                                <div style=" padding: 5px; "><strong>ISBN : </strong><span> {{$product->ISBN}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Ngôn ngữ : </strong><span> {{$product->language}}</span></div>
-                                                <div style=" padding: 5px; "><strong>Đối tượng : </strong><span> {{$product->demographic}}</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
 
 
