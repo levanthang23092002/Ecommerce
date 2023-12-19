@@ -24,7 +24,7 @@ class UserProfileComponent extends Component
         // Kiểm tra xem tệp tồn tại trước khi thực hiện unlink
         $avatarPath = 'assets/imgs/products/avatars/' . Auth::user()->profile_photo_path;
 
-        if (file_exists($avatarPath)) {
+        if (file_exists($avatarPath) && Auth::user()->profile_photo_path) {
             unlink($avatarPath);
         }
 

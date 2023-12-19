@@ -35,7 +35,6 @@ class ProfileController extends Controller
             'ward' => ['required', 'string', 'max:255'],
             'district' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
-            'shop_desc' => ['required'],
         ], [
             'name.required' => 'Vui lòng nhập tên.',
             'name.string' => 'Tên phải là một chuỗi ký tự.',
