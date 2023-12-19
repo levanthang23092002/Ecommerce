@@ -66,12 +66,13 @@ Route::group(['middleware' => ['userLogin']], function () {
         Route::get('order-detail/{order_id}', [OrderController::class, 'show'])->name('user.order_detail');
         Route::post('order-cancel/{order_id}', [OrderController::class, 'cancel'])->name('user.order_cancel');
         Route::get('checkout', UserCheckoutComponent::class)->name('user.checkout');
-        Route::get('payment-result', UserPaymentResultComponent::class)->name('user.payment_result');
+       
         Route::get('wishlist', WishlistComponent::class)->name('user.wishlist');
     });
 });
 
 // Guest
+Route::get('payment-result', UserPaymentResultComponent::class)->name('user.payment_result');
 Route::get('/', HomeComponent::class)->name('home.index');
 // Route::get('/shop', ShopComponent::class)->name('shop');
 Route::get('/shop/{seller_id}', ShopComponent::class)->name('shop');
