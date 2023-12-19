@@ -110,49 +110,7 @@
                                     <nav>
                                         <ul>
                                             <li><a class="active" href="/">Trang chủ </a></li>
-                                            <li class="position-static"><a href="#">Danh mục <i
-                                                        class="fi-rs-angle-down"></i></a>
-                                                <ul class="mega-menu">
-                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a class="menu-title" href="#">Truyện chữ</a>
-                                                        <ul>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-han-quoc']) }}">Truyện chữ Hàn Quốc</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-nhat-ban']) }}">Truyện chữ Nhật Bản</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-phuong-tay']) }}">Truyện chữ Phương Tây</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-viet-nam']) }}">Truyện chữ Việt Nam</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chu-trung-quoc']) }}">Truyện chữ Trung Quốc</a>
-                                                            </li>
-
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a class="menu-title" href="#">Truyện tranh</a>
-                                                        <ul>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-han-quoc']) }}">Truyện tranh Hàn Quốc</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-nhat-ban']) }}">Truyện tranh Nhật Bản</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-phuong-tay']) }}">Truyện tranh Phương
-                                                                    Tây</a></li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-viet-nam']) }}">Truyện tranh Việt Nam</a>
-                                                            </li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-tranh-trung-quoc']) }}">Truyện tranh Trung
-                                                                    Quốc</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="sub-mega-menu sub-mega-menu-width-22">
-                                                        <a class="menu-title" href="#">Khác</a>
-                                                        <ul>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'art-book']) }}">Art Book</a></li>
-                                                            <li><a href="{{ route('product.category', ['slug' => 'truyen-chon-bo']) }}">Truyện chọn bộ</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
+                                            
                                             @if(Auth::check() && Auth::user()->utype === "SELLER")
                                                 <li><a href="{{route('shop', ['seller_id' => Auth::user()->id])}}">Cửa hàng của bạn</a></li>
                                                 <li><a href="{{route('seller.dashboard')}}">Quản lý cửa hàng</a></li>
