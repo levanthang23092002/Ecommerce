@@ -83,7 +83,6 @@ class UserCheckoutComponent extends Component
 
         // Chuyển đổi dữ liệu JSON nhận được thành mảng PHP
         $result = json_decode($response, true);
-
         if(!$result['fee']['delivery']) {
             return -1;
         }
@@ -104,12 +103,12 @@ class UserCheckoutComponent extends Component
                 $weight = $carts->sum(function ($cart) {
                     return $cart->quantity * $cart->product->weight;
                 });
-                if($weight === -1) {
+                $this->shipFees[$sellerId] = $this->calculatorShipFee($sellerCity, $sellerDistrict, $this->city, $this->district, $weight);
+                if($this->shipFees[$sellerId] === -1) {
                     return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Địa chỉ này không được hỗ trợ giao hàng']); 
-                } elseif ($weight === -2) {
+                } elseif ($this->shipFees[$sellerId] === -2) {
                     return view('livewire.user.user-checkout-component', ['shipFees' => [], 'errorMessage' => 'Xảy ra lỗi trong quá trình tính phí giao hàng']); 
                 }
-                $this->shipFees[$sellerId] = $this->calculatorShipFee($sellerCity, $sellerDistrict, $this->city, $this->district, $weight);
             }
         }
         return view('livewire.user.user-checkout-component', ['shipFees' => $this->shipFees]);
