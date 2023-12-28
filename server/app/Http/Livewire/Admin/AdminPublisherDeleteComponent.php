@@ -2,8 +2,8 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use Livewire\Component;
-use App\Models\Publisher; 
 
 class AdminPublisherDeleteComponent extends Component
 {
@@ -16,7 +16,7 @@ class AdminPublisherDeleteComponent extends Component
 
     public function mount($publisher_id)
     {
-        $publisher = Publisher::find($publisher_id);
+        $publisher = Brand::find($publisher_id);
         $this->publisher_id = $publisher->id;
         $this->name = $publisher->name;
         $this->slug= $publisher->slug;
@@ -24,13 +24,13 @@ class AdminPublisherDeleteComponent extends Component
 
     public function cancelDelete()
     {
-        return redirect('/seller/publishers');
+        return redirect('/admin/publishers');
 
     }
 
     public function deletePublisher()
     {
-        $publisher = Publisher::find($this->publisher_id);
+        $publisher = Brand::find($this->publisher_id);
         $publisher->delete();
         session()->flash ('message', 'Đã xoá nhà phát hành thành công!');
     }

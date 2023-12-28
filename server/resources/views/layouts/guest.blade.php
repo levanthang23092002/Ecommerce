@@ -83,6 +83,7 @@
                     
                     <a href="/" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Trang chủ</a>
                     <a href="{{route('admin.categories')}}" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Danh mục</a>
+                    <a href="{{route('admin.publishers')}}" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Thương hiệu</a>
                     <a href="{{route('admin.dashboard')}}" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Thống kê</a>
                     @endif
                 @endif

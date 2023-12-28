@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Category;
@@ -42,6 +43,7 @@ class AdminProductEditComponent extends Component
         $this->quantity = $product->quantity;
         $this->category_id = $product->category_id;
         $this->weight = $product->weight;
+        $this->publisher_id = $product->brand_id;
 
     }
     public function increasePage()
@@ -105,6 +107,7 @@ class AdminProductEditComponent extends Component
             'quantity' => 'required',
             'weight' => 'required',
             'category_id' => 'required',
+            'publisher_id' => 'required',
             ]);
             $product = Product::find($this->product_id);
             $product->name = $this->name;
@@ -116,6 +119,7 @@ class AdminProductEditComponent extends Component
             $product->stock_status = $this->stock_status;
             $product->quantity = $this->quantity;
             $product->weight = $this->weight;
+            $product->brand_id =$this->publisher_id;
             if($this->newimage){
                 unlink('assets/imgs/products/products/'.$product->image);
                 $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
@@ -132,8 +136,10 @@ class AdminProductEditComponent extends Component
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
+        $publishers = Brand::orderBy('name', 'ASC')->get();
         return view('livewire.admin.admin-product-edit-component', [
             'categories' => $categories,
+            'publishers' => $publishers,
         ])->layout('layouts.guest');
     }
 }

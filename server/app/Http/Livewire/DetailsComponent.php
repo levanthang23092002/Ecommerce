@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Brand;
 use App\Models\Response_review;
 use App\Models\Review_like;
 use App\Models\User;
@@ -188,6 +189,7 @@ class DetailsComponent extends Component
             $rproducts = Product::where('category_id', $this->product->category_id)->inRandomOrder()->limit(4)->get();
             $nproducts = Product::latest()->take(4)->get();
             $categories = Category::orderBy('name', 'ASC')->get();
+            $publisher = Brand::where('id', $this->product->brand_id)->first();
             $reviews = Review::where('product_id', $this->product->id)->orderBy('updated_at', 'desc')->paginate(5);
             $wishCount = Wish::where('product_id' , $this->product->id)->count();
 
@@ -196,6 +198,7 @@ class DetailsComponent extends Component
                 'rproducts' => $rproducts,
                 'nproducts' => $nproducts,
                 'categories' => $categories,
+                'publisher' => $publisher,
                 'reviews' => $reviews,
                 'quantity' => $this->quantity,
                 'wishCount' => $wishCount,
@@ -207,6 +210,7 @@ class DetailsComponent extends Component
                 'rproducts' => null,
                 'nproducts' => null,
                 'categories' => null,
+                'publisher' => null,
                 'reviews' => null,
                 'quantity' => 0,
                 'wishCount' => 0,
