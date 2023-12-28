@@ -32,7 +32,7 @@
             <div class="container">
                 <div class="header-wrap">
                     <div class="logo " >
-                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo" style="width:90px; height:90px;margin-right:100px" ></a>
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo" style="width:90px; height:90px;margin-left:20px;margin-right:200px" ></a>
                     </div>
                     <div class="header-right">
                         @livewire('search')
