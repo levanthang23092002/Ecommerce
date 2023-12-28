@@ -69,18 +69,14 @@
                                                                     {{ $orderItem->product->name }}
                                                             </a>
                                                     </h5>
-                                                    <span class="product-qty">x {{ $orderItem->quantity }}</span>
+                                                    <span class="product-qty">{{ number_format($orderItem->unit_price) }} VND x {{ $orderItem->quantity }}</span>
                                                 </td>
-                                                <td>{{ number_format($orderItem->amount) }} VND</td>
+                                                <td>{{ number_format($orderItem->unit_price * $orderItem->quantity) }} VND</td>
                                             </tr>
                                     @endforeach
                                     <tr>
                                                 <th>Tổng tiền các sản phẩm</th>
                                                 <td class="product-subtotal" colspan="2">{{$sub_total}}</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Thuế</th>
-                                                <td class="product-subtotal" colspan="2">{{$tax}}</td>
                                             </tr>
                                             <tr>
                                                 <th>Phí giao hàng</th>

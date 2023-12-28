@@ -57,16 +57,6 @@
                                             <p class="text-danger">{{$message}}</p>
                                         @enderror
 
-                                        <label for="publisher_id" class="form-label" >Nhà phát hành</label>
-                                        <select class="form-control"  style="background-color:white" name="publisher_id" wire:model="publisher_id" id="publisherSelect">
-                                        <option value="">Chọn nhà phát hành</option>>
-                                        @foreach($publishers as $publisher)
-                                        <option value="{{$publisher->id}}">{{$publisher->name}}</option>
-                                        @endforeach
-                                        </select>
-                                        @error('publisher_id')
-                                        <p class="text-danger">{{$message}}</p>
-                                        @enderror
                                     </div>   
                                     <div class="row">   
                                     <div class="mb-3 mt-3  col-md-3">
@@ -117,16 +107,21 @@
                                     </div>
 
                                                                                                                                           
-                                    <div class="mb-3 mt-3 col-md-3">
-                                        <label for="stock_status" class="form-label"> Tình trạng hàng hoá</label>
-                                            <select class="form-control"  style="background-color:white" name="stock_status" wire:model="stock_status">
-                                                <option value="Còn hàng">Còn hàng</option>
-                                                <option value="Hết hàng">Hết hàng</option>
-                                            </select>
-                                        @error('stock_status')
+                                    <div class="mb-3 mt-3  col-md-3">
+                                        <label for="weight" class="form-label">Trọng lượng (gram)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button" wire:click="decreaseWeight">-</button>
+                                            </span>
+                                            <input type="text" name="weight" class="form-control"  style="background-color:white" placeholder="Nhập khối lượng (g)" wire:model="weight"/>
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-secondary" type="button" wire:click="increaseWeight">+</button>
+                                            </span>
+                                        </div>
+                                        @error('weight')
                                         <p class="text-danger">{{$message}}</p>
                                         @enderror
-                                    </div>
+                                    </div>  
                                     </div>
                                     <div class="mb-3 mt-3">
                                         <label for="newimage" class="form-label">Image</label>

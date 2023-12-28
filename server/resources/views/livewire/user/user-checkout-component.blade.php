@@ -209,13 +209,7 @@
                                                 }))))}} VND
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <th>Thuế</th>
-                                            <td class="product-subtotal" colspan="3">
-                                                {{number_format(intval(str_replace(',', '',$carts->sum(function($cart) {
-                                                return $cart->quantity * $cart->product->regular_price;
-                                                }))) * 0.05 )}} VND</td>
-                                        </tr>
+                                        
                 
                                         <tr>
                                             <th>Phí giao hàng</th>
@@ -240,7 +234,7 @@
                                                             return $cart->quantity * $cart->product->regular_price;
                                                         });
                                                     ?>
-                                                    {{number_format($subtotal + $subtotal * 0.05 + $shipFees[$sellerId])}} VND
+                                                    {{number_format($subtotal + $shipFees[$sellerId])}} VND
                                                     </span>
                                                     @else
                                                     Vui lòng nhập thông tin giao hàng để tính thành tiền

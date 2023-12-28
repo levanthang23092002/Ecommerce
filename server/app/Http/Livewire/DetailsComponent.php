@@ -188,8 +188,6 @@ class DetailsComponent extends Component
             $rproducts = Product::where('category_id', $this->product->category_id)->inRandomOrder()->limit(4)->get();
             $nproducts = Product::latest()->take(4)->get();
             $categories = Category::orderBy('name', 'ASC')->get();
-            $publisher = Publisher::where('id', $this->product->publisher_id)->first();
-            $author = Author::where('id', $this->product->author_id)->first();
             $reviews = Review::where('product_id', $this->product->id)->orderBy('updated_at', 'desc')->paginate(5);
             $wishCount = Wish::where('product_id' , $this->product->id)->count();
 
@@ -198,8 +196,6 @@ class DetailsComponent extends Component
                 'rproducts' => $rproducts,
                 'nproducts' => $nproducts,
                 'categories' => $categories,
-                'publisher' => $publisher,
-                'author' => $author,
                 'reviews' => $reviews,
                 'quantity' => $this->quantity,
                 'wishCount' => $wishCount,
@@ -211,15 +207,10 @@ class DetailsComponent extends Component
                 'rproducts' => null,
                 'nproducts' => null,
                 'categories' => null,
-                'publisher' => null,
-                'author' => null,
                 'reviews' => null,
                 'quantity' => 0,
                 'wishCount' => 0,
             ]);
         }
-       
-
-        
     }
 }

@@ -43,7 +43,6 @@ class AdminOrderEditComponent extends Component
         $this->payment_method = $order->payment_method;
         $this->payment_status = $order->payment_status;
         $this->sub_total = number_format($order->sub_total, 0, ',', ',') . ' VND';
-        $this->tax = number_format($order->tax, 0, ',', ',') . ' VND';
         $this->shipping = number_format($order->shipping, 0, ',', ',') . ' VND';
         $this->amount = number_format($order->amount, 0, ',', ',') . ' VND';
         $this->note = $order->note;

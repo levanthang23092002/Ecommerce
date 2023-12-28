@@ -72,9 +72,9 @@
                                                         href="{{route('product.details',['slug'=>$products[$item->product_id]->slug])}}">{{$products[$item->product_id]->name}}</a>
                                                 </h5> <span class="product-qty">x {{$item->quantity}}</span>
                                             </td>
-                                            <td>{{number_format(intval($item->amount) / intval($item->quantity))}} VND
+                                            <td>{{number_format(intval($item->unit_price))}} VND
                                             </td>
-                                            <td>{{number_format($item->amount)}} VND</td>
+                                            <td>{{number_format($item->unit_price * intval($item->quantity))}} VND</td>
                                         </tr>
                                         @endforeach
                                         <tr>
@@ -82,12 +82,6 @@
                                             <td class="product-subtotal" colspan="3">
                                                 {{number_format($order->sub_total)}} VND</td>
                                         </tr>
-                                        <tr>
-                                            <th>Thuế</th>
-                                            <td class="product-subtotal" colspan="3"> {{number_format($order->tax)}} VND
-                                            </td>
-                                        </tr>
-
                                         <tr>
                                             <th>Phí giao hàng</th>
                                             <td colspan="3"><em>{{number_format($order->shipping)}} VND</em></td>
