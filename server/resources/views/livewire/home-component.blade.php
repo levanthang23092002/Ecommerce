@@ -11,7 +11,7 @@
 @livewireStyles
 <main class="main" >
 
-        <section class="home-slider position-relative pt-50" wire:ignore>
+        <!-- <section class="home-slider position-relative pt-50" wire:ignore>
             <div class="hero-slider-1 dot-style-1 dot-style-1-position-1">
                 <div class="single-hero-slider single-animation-wrap">
                     <div class="container">
@@ -55,43 +55,8 @@
                 </div>                
             </div>
             <div class="slider-arrow hero-slider-1-arrow"></div>
-        </section>
-        <section class="section-padding" wire:ignore>
-            <div class="container wow fadeIn animated">
-                <h3 class="section-title mb-20">Sản phẩm <span> đề xuất</span></h3>
-                <div class="carausel-6-columns-cover position-relative">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
-                    <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
-                        
-     
-                        @foreach($recommended_products as $product)
-                        <div class="product-cart-wrap small hover-up">
-                            <div class="product-img-action-wrap">
-                                <div class="product-img">
-                                    <a href="{{route('product.details',['slug'=>$product->slug])}}">
-                                        <img class="default-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
-                                        <img class="hover-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
-                                    </a>
-                                </div>
-                                <div class="product-badges product-badges-position product-badges-mrg">
-                                    <span class="new">Đề xuất</span>
-                                </div>
-                            </div>
-                            <div class="product-content-wrap">
-                                <h2><a href="{{route('product.details',['slug'=>$product->slug])}}">{{substr($product->name,0,60)}}</a></h2>
-                                <div class="product-price">
-                                    <span>{{number_format($product->regular_price)}} VND</span>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    
-                        
-                    </div>
-                </div>
-            </div>
-        </section>
+        </section> -->
+        
         <section class="product-tabs section-padding position-relative wow fadeIn animated">
             <div class="bg-square"></div>
             <div class="container">
@@ -234,6 +199,42 @@
            
             </div>
         </section>
+        <section class="section-padding" wire:ignore>
+            <div class="container wow fadeIn animated">
+                <h3 class="section-title mb-20">Sản phẩm <span> đề xuất</span></h3>
+                <div class="carausel-6-columns-cover position-relative">
+                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-2-arrows"></div>
+                    <div class="carausel-6-columns carausel-arrow-center" id="carausel-6-columns-2">
+                        
+     
+                        @foreach($recommended_products as $product)
+                        <div class="product-cart-wrap small hover-up">
+                            <div class="product-img-action-wrap">
+                                <div class="product-img">
+                                    <a href="{{route('product.details',['slug'=>$product->slug])}}">
+                                        <img class="default-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                        <img class="hover-img" style="height: 250px" src=" {{asset('assets/imgs/products/products')}}/{{$product->image}}" alt="">
+                                    </a>
+                                </div>
+                                <div class="product-badges product-badges-position product-badges-mrg">
+                                    <span class="new">Đề xuất</span>
+                                </div>
+                            </div>
+                            <div class="product-content-wrap">
+                                <h2><a href="{{route('product.details',['slug'=>$product->slug])}}">{{substr($product->name,0,60)}}</a></h2>
+                                <div class="product-price">
+                                    <span>{{number_format($product->regular_price)}} VND</span>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
         <section class="featured section-padding position-relative" wire:ignore>
             <div class="container">
                 <div class="row">
@@ -277,37 +278,7 @@
             </div>
         </section>              
       
-        <section class="section-padding" wire:ignore>
-            <div class="container">
-                <h3 class="section-title mb-20 wow fadeIn animated"><span>Các hãng </span>đối tác</h3>
-                <div class="carausel-6-columns-cover position-relative wow fadeIn animated">
-                    <div class="slider-arrow slider-arrow-2 carausel-6-columns-arrow" id="carausel-6-columns-3-arrows"></div>
-                    <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-1.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-3.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-2.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-4.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-5.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-6.png" alt="" style="width: 100px;">
-                        </div>
-                        <div class="brand-logo">
-                            <img class="img-grey-hover" src="assets/imgs/banner/brand-7.png" alt="" style="width: 100px;">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        
         
     </main>
     @livewireScripts  

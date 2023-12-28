@@ -25,7 +25,6 @@ return new class extends Migration
             $table->tinyInteger('payment_status');
             $table->tinyInteger('order_status');
             $table->unsignedBigInteger('sub_total');
-            $table->unsignedBigInteger('tax')->default(0);
             $table->unsignedBigInteger('shipping')->default(0);
             $table->string('tracking')->nullable();
             $table->string('note')->nullable();

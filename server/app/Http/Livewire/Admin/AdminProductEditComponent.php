@@ -23,6 +23,7 @@ class AdminProductEditComponent extends Component
     public $sale_price;
     public $stock_status;
     public $quantity;
+    public $weight;
     public $image;
     public $pages;
     public $category_id;
@@ -40,7 +41,8 @@ class AdminProductEditComponent extends Component
         $this->stock_status = $product->stock_status;
         $this->quantity = $product->quantity;
         $this->category_id = $product->category_id;
-        $this->publisher_id = $product->publisher_id;
+        $this->weight = $product->weight;
+
     }
     public function increasePage()
     {
@@ -101,8 +103,8 @@ class AdminProductEditComponent extends Component
             'sale_price' => 'required',
             'stock_status' => 'required',
             'quantity' => 'required',
+            'weight' => 'required',
             'category_id' => 'required',
-            'publisher_id' => 'required'
             ]);
             $product = Product::find($this->product_id);
             $product->name = $this->name;
@@ -113,6 +115,7 @@ class AdminProductEditComponent extends Component
             
             $product->stock_status = $this->stock_status;
             $product->quantity = $this->quantity;
+            $product->weight = $this->weight;
             if($this->newimage){
                 unlink('assets/imgs/products/products/'.$product->image);
                 $imageName = Carbon::now()->timestamp . '.' . $this->newimage->extension();
@@ -120,7 +123,6 @@ class AdminProductEditComponent extends Component
                 $product->image = $imageName;
             }
             $product->category_id = $this->category_id;
-            $product->publisher_id = $this->publisher_id; 
             $product->save();
     
             session()->flash('message', 'Đã cập nhật sản phẩm thành công!');
@@ -130,12 +132,8 @@ class AdminProductEditComponent extends Component
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        $authors = Author::orderBy('name', 'ASC')->get();
-        $publishers = Publisher::orderBy('name', 'ASC')->get();
         return view('livewire.admin.admin-product-edit-component', [
             'categories' => $categories,
-            'authors' => $authors,
-            'publishers' => $publishers,
         ])->layout('layouts.guest');
     }
 }

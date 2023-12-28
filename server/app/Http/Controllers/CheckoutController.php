@@ -117,7 +117,6 @@ class CheckoutController extends Controller
             $seller = User::where('id', $data['seller_id'])->first();
             $sellerCity = array_reverse(explode(',', $seller->address))[0];
             $sellerDistrict = array_reverse(explode(',', $seller->address))[1];
-            $tax = $subtotal * 0.05;
             $weight = $carts->sum(function ($cart) {
                 return $cart->quantity * $cart->product->weight;
             });
@@ -128,7 +127,7 @@ class CheckoutController extends Controller
                 return back()->withErrors('Xảy ra lỗi trong quá trình tính phí giao hàng.');
             }
 
-            $amount = $subtotal + $tax + $shipping;
+            $amount = $subtotal + $shipping;
             $order = new Order([
                 'id' => $orderId,
                 'user_id' => Auth::user()->id,
@@ -139,7 +138,6 @@ class CheckoutController extends Controller
                 'payment_method' => $data['payment_option'],
                 'payment_status' => 0,
                 'order_status' => 0,
-                'tax' => $subtotal * 0.05,
                 'sub_total' => $subtotal,
                 'shipping' => $shipping,
                 'amount' => $amount,
@@ -163,7 +161,7 @@ class CheckoutController extends Controller
                         'order_id' => $orderId,
                         'product_id' => $cartItem->product_id,
                         'quantity' => $cartItem->quantity,
-                        'amount' => intval($product->regular_price) * intval($cartItem->quantity)
+                        'unit_price' => intval($product->regular_price)
                     ]));
                 } else {
                     // Xử lý tình huống khi không đủ sản phẩm
