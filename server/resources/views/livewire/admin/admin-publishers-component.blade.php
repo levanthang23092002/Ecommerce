@@ -17,7 +17,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6 d-flex justify-content-end">
-                                        <a href="{{ route('admin.publisher.add') }}" class="btn btn-success btn-sx">Thêm nhà phát hành</a>
+                                        <a href="{{ route('admin.publisher.add') }}" class="btn btn-success btn-sx">Thêm thương hiệu</a>
                                     </div>
                                 </div>
                             </div>
@@ -26,7 +26,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>Tên nhà nhà phát hành</th>
+                                                    <th>Tên thương hiệu</th>
                                                     <th>Slug</th>
                                                     <th>Hành động</th>
                                                 </tr>

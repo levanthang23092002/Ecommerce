@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use App\Models\Category;
@@ -91,6 +92,7 @@ class AdminProductAddComponent extends Component
             'quantity' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'category_id' => 'required',
+            'publisher_id' => 'required',
             ]);
             $user = auth()->user();
             $product = new Product();
@@ -107,6 +109,7 @@ class AdminProductAddComponent extends Component
             $this->image->storeAs('products', $imageName);
             $product->image = $imageName;
             $product->category_id = $this->category_id;
+            $product->brand_id = $this->publisher_id;
             $product->save();
     
             session()->flash('message', 'Thêm sản phẩm thành công!');
@@ -115,9 +118,10 @@ class AdminProductAddComponent extends Component
     public function render()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-
+        $publishers = Brand::orderBy('name', 'ASC')->get();
         return view('livewire.admin.admin-product-add-component', [
             'categories' => $categories,
+            'publishers' => $publishers,
         ])->layout('layouts.guest');
     }
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Support\Str;
-use App\Models\Publisher; 
 
 class AdminPublisherAddComponent extends Component
 {
@@ -28,7 +28,7 @@ class AdminPublisherAddComponent extends Component
             'slug' => 'required'
         ]);
 
-        Publisher::create([
+        Brand::create([
             'name' => $this->name,
             'slug' => $this->slug
         ]);

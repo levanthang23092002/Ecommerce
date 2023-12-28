@@ -21,25 +21,16 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('regular_price',8,0);
             $table->decimal('sale_price',8,0)->nullable();
-            $table->string('ISBN')->nullable();
-            $table->string('cover_type');
-            $table->string('size')->nullable();
-            $table->string('release_date')->nullable();
-            $table->integer('weight')->nullable();
-            $table->integer('pages')->nullable();
-            $table->string('language')->nullable();
-            $table->string('demographic')->nullable();
             $table->string('stock_status');
             $table->unsignedInteger('quantity')->default(10);
             $table->string('image');
             $table->softDeletes();
             $table->bigInteger('category_id')->unsigned()->nullable();
             $table->bigInteger('author_id')->unsigned()->nullable();
-            $table->bigInteger('publisher_id')->unsigned()->nullable();
+            $table->bigInteger('brand_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
-            $table->foreign('author_id')->references('id')->on('authors')->onDelete('cascade');
-            $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('cascade');
+            $table->foreign('brand_id')->nullable()->references('id')->on('brands')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

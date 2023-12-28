@@ -21,9 +21,9 @@ class product extends Model
         return $this->hasOne(Category::class, 'id', 'category_id');
     }
 
-    public function publisher()
+    public function brand()
     {
-        return $this->hasOne(Publisher::class, 'id', 'publisher_id');
+        return $this->hasOne(Brand::class, 'id', 'brand_id');
     }
 
     public function user()

@@ -57,7 +57,16 @@
                                             <p class="text-danger">{{$message}}</p>
                                         @enderror
                                     </div>
-                                       
+                                    <label for="publisher_id" class="form-label" >Thương hiệu</label>
+                                        <select class="form-control" style="background-color:white" name="publisher_id" wire:model="publisher_id" id="publisherSelect">
+                                        <option value="">Chọn thương hiệu</option>>
+                                        @foreach($publishers as $publisher)
+                                        <option value="{{$publisher->id}}">{{$publisher->name}}</option>
+                                        @endforeach
+                                        </select>
+                                        @error('publisher_id')
+                                        <p class="text-danger">{{$message}}</p>
+                                        @enderror
                                     <div class="row">   
                                     <div class="mb-3 mt-3  col-md-3">
                                         <label for="regular_price" class="form-label">Giá bán</label>

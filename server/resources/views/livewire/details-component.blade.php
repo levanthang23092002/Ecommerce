@@ -71,7 +71,9 @@
 
                                                     $averageRating = $totalRatings > 0 ? $sumRatings / $totalRatings : 0;
                                                 @endphp
-
+                                                @if($product->brand_id)
+                                                <p style="font-size:17px">Thương hiệu: <span class="text-brand">{{ $product->brand->name }}</span></p>
+                                                @endif
                                                 <p style="font-size:17px">Danh mục: <span class="text-brand">{{ $product->category->name }}</span></p>
                                                 <p style="font-size:17px">Đánh giá: <span class="text-brand">{{ $totalRatings > 0 ? number_format($averageRating, 2) : 'Không có đánh giá' }} <img src="{{ asset('assets/imgs/star.png')}}" width="20" height="20" style="vertical-align: middle; margin-bottom: 5px;"></span></p>
                                                 <p style="font-size:17px">Đã bán: <span class="text-brand">{{ $product->quantity_sold }}</span></p>

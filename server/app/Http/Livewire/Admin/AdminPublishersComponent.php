@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Admin;
 
+use App\Models\Brand;
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Models\Publisher;
 
 class AdminPublishersComponent extends Component
 {
@@ -12,7 +12,7 @@ class AdminPublishersComponent extends Component
     public $search = '';
     public function render()
     {
-        $publishers = Publisher::where('name', 'like', '%' . $this->search . '%')
+        $publishers = Brand::where('name', 'like', '%' . $this->search . '%')
             ->orderBy('id', 'ASC')
             ->paginate(5);
     
