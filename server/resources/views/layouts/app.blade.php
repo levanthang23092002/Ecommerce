@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Bookstore</title>
+    <title>Ecommerce</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -31,8 +31,8 @@
         <div class="header-middle header-middle-ptb-1 d-none d-lg-block">
             <div class="container">
                 <div class="header-wrap">
-                    <div class="logo logo-width-1">
-                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo"></a>
+                    <div class="logo " >
+                        <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo" style="width:90px; height:90px;margin-right:100px" ></a>
                     </div>
                     <div class="header-right">
                         @livewire('search')
@@ -175,10 +175,10 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-6">
                         <div class="widget-about font-md mb-md-5 mb-lg-0">
-                            <div class="logo logo-width-1 wow fadeIn animated">
-                                <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo"></a>
+                            <div class="logo  wow fadeIn animated">
+                                <a href="/"><img src="{{ asset('assets/imgs/logo/logo.png')}}" alt="logo" width=80px height=100px></a>
                             </div>
-                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Contact</h5>
+                            <h5 class="mt-20 mb-10 fw-600 text-grey-4 wow fadeIn animated">Liên hệ</h5>
                             <p class="wow fadeIn animated">
                                 <strong>Địa chỉ: </strong>48 Cao Thắng - Hải Châu - Đà Nẵng
                             </p>
