@@ -1,7 +1,7 @@
 <div>
     <main class="main">
     <div class="container" style="background-color: #f0f0f0; text-align: center; padding: 20px; margin-bottom: 20px">
-    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: black;">Thêm nhà phát hành</h2>
+    <h2 style="margin: 0; font-size: 24px; font-weight: bold; color: black;">Thêm thương hiệu</h2>
 </div>
             <section class="mt-50 mb-50">
                 <div class="container">
@@ -11,10 +11,10 @@
                                 <div class="card-header">
                                     <div class="row">
                                         <div class="col-md-6">
-                                        Thêm nhà phát hành
+                                        Thêm thương hiệu
                                         </div>
                                         <div class="col-md-6">
-                                        <a href="{{route('admin.publishers')}}" class="btn btn-success float-end">Tất cả nhà phát hành</a>
+                                        <a href="{{route('admin.publishers')}}" class="btn btn-success float-end">Tất cả thương hiệu</a>
                                         </div>
                                     </div>
                                 </div>
@@ -24,7 +24,7 @@
                                     @endif
                                 <form wire:submit.prevent="storePublisher">
                                     <div class="mb-3 mt-3">
-                                        <label for="name" class="form-label">Tên nhà phát hành</label>
+                                        <label for="name" class="form-label">Tên thương hiệu</label>
                                         <input type="text" name="name" class="form-control" style="background-color:white" placeholder="Nhập tên" wire:model="name" wire:keyup="generateSlug"/>
                                         @error('name')
                                             <p class="text-danger">{{$message}}</p>
