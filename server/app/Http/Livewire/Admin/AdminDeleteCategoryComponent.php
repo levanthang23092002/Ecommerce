@@ -24,7 +24,7 @@ class AdminDeleteCategoryComponent extends Component
 
     public function cancelDelete()
     {
-        return redirect('/seller/categories');
+        return redirect('/admin/categories');
 
     }
 
