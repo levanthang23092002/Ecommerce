@@ -60,7 +60,7 @@
 
                             </div>
                             @endforeach
-                            {{$wishes->links('pagination::bootstrap-4')}}
+                            {{$wishes->links()}}
                     @else
                         <div class="alert alert-warning" role="alert">
                             Bạn không có sản phẩm yêu thích!
